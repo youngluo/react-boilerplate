@@ -5,10 +5,10 @@ let path = require('path'),
 
 const ROOT_PATH = path.resolve(__dirname), //项目根目录
     APP_PATH = path.resolve(ROOT_PATH, 'src'), //项目源代码目录
-    BUILD_PATH = path.resolve(ROOT_PATH, 'dist'),//发布文件存放目录
-    NODE_MODULES_PATH = path.resolve(ROOT_PATH, 'node_modules'),//node_modules目录
+    BUILD_PATH = path.resolve(ROOT_PATH, 'dist'), //发布文件存放目录
+    NODE_MODULES_PATH = path.resolve(ROOT_PATH, 'node_modules'), //node_modules目录
     ENTRY_FILE = path.resolve(APP_PATH, 'index'), //入口文件地址
-    TEMPLATE_FILE = path.resolve(APP_PATH, 'index.html');//html模板文件地址
+    TEMPLATE_FILE = path.resolve(APP_PATH, 'index.html'); //html模板文件地址
 
 module.exports = function (env) {
     let production = env ? env.production : false;
@@ -28,45 +28,46 @@ module.exports = function (env) {
             rules: [{
                 test: /\.js$/,
                 exclude: NODE_MODULES_PATH,
-                loader: 'babel-loader',
+                use: 'babel-loader',
                 include: APP_PATH
             }, {
                 test: /\.css$/,
                 exclude: NODE_MODULES_PATH,
-                loader: ExtractTextPlugin.extract({ use: ['css-loader', 'autoprefixer-loader'] }),
+                use: ExtractTextPlugin.extract(['css-loader', 'autoprefixer-loader']),
                 include: APP_PATH
             }, {
                 test: /\.less$/,
-                exclude: NODE_MODULES_PATH,
-                loader: ExtractTextPlugin.extract({ use: ['css-loader', 'autoprefixer-loader', 'less-loader'] }),
-                include: APP_PATH
+                use: ExtractTextPlugin.extract(['css-loader', 'autoprefixer-loader', 'less-loader']),
             }, {
                 test: /\.scss$/,
                 exclude: NODE_MODULES_PATH,
-                loader: ExtractTextPlugin.extract({ use: ['css-loader', 'autoprefixer-loader', 'sass-loader'] }),
+                use: ExtractTextPlugin.extract(['css-loader', 'autoprefixer-loader', 'sass-loader']),
                 include: APP_PATH
             }, {
                 test: /\.(eot|woff|svg|ttf|woff2|gif)(\?|$)/,
                 exclude: NODE_MODULES_PATH,
-                loader: 'file-loader',
-                options: {
-                    name: '[name].[ext]'
+                use: {
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]'
+                    }
                 },
                 include: APP_PATH
             }, {
                 test: /\.(png|jpg)$/,
                 exclude: NODE_MODULES_PATH,
-                loader: 'url-loader',
-                options: {
-                    limit: 8192,
-                    name: 'images/[name].[hash:8].[ext]'
+                use: {
+                    loader: 'url-loader',
+                    options: {
+                        limit: 8192, //limit的参数，当你图片大小小于这个限制的时候，会自动启用base64编码图片
+                        name: 'images/[name].[hash:8].[ext]'
+                    }
                 },
-                //limit的参数，当你图片大小小于这个限制的时候，会自动启用base64编码图片
                 include: APP_PATH
             }, {
                 test: /\.jsx$/,
                 exclude: NODE_MODULES_PATH,
-                loaders: ['jsx-loader', 'babel-loader'],
+                use: ['jsx-loader', 'babel-loader'],
                 include: APP_PATH
             }]
         },
@@ -76,11 +77,7 @@ module.exports = function (env) {
                 template: TEMPLATE_FILE, //html模板路径
                 hash: false,
             }),
-            new ExtractTextPlugin('css/[name].[chunkhash:8].css'),
-            new webpack.HotModuleReplacementPlugin(),
-            // enable HMR globally
-            new webpack.NamedModulesPlugin(),
-            // prints more readable module names in the browser console on HMR updates
+            new ExtractTextPlugin('css/[name].[chunkhash:8].css')
         ],
         resolve: {
             extensions: ['.js', '.jsx', '.less', '.scss', '.css'], //后缀名自动补全
@@ -88,8 +85,7 @@ module.exports = function (env) {
         devServer: {
             contentBase: BUILD_PATH,
             compress: true,
-            port: 8000,
-            hot: true
+            port: 8000
         }
     }
 }

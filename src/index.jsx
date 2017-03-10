@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-//import route from './config/routes'; //路由配置
+import routes from './router'; //路由配置
 //import store from './redux/store';
 
 import './index.scss';
@@ -10,10 +10,10 @@ import './index.scss';
 //     //console.log(store.getState())
 // });
 
-/*ReactDOM.render(
-    <Provider store={store}>
-        {route}
+ReactDOM.render(
+    <Provider>
+        {routes}
     </Provider>,
-    document.body.appendChild(document.createElement('div'))
-);*/
+    document.getElementById('app')
+);
 
