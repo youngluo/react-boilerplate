@@ -1,0 +1,23 @@
+html,
+body,
+#app,
+.ant-layout {
+    height: 100%;
+}
+
+.ant-layout-content {
+    position: relative;
+}
+
+.loading-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    .ant-spin-dot {
+        margin: 0 auto;
+    }
+    .ant-spin-text {
+        margin-top: 10px;
+    }
+}
