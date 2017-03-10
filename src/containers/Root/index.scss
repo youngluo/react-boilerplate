@@ -1,0 +1,18 @@
+.logo {
+  height: 32px;
+  margin: 16px;
+  overflow: hidden;
+  color: #fff;
+  line-height: 32px;
+  white-space: nowrap;
+  text-align: center;
+  text-overflow: ellipsis;
+  background: rgba(255, 255, 255, .2);
+  border-radius: 6px;
+}
+
+.content {
+  padding: 30px;
+  overflow: auto;
+  background: #f0f0f0;
+}

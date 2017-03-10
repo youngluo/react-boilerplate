@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "stylelint-config-sass-guidelines",
+    "stylelint-config-rational-order"
+  ],
+  "rules": {
+    "number-leading-zero": "never",
+    "order/properties-alphabetical-order": null
+  }
+}

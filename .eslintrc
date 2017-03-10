@@ -1,0 +1,39 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 7,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "es6": true,
+    "node": true,
+    "browser": true
+  },
+  "globals": {
+    "document": true,
+    "navigator": true,
+    "window": true,
+    "node": true
+  },
+  "extends": ["airbnb", "plugin:react/jsx-runtime"],
+  "plugins": ["react", "jsx-a11y", "import", "react-hooks"],
+  "rules": {
+    "semi": ["error", "never"],
+    "comma-dangle": ["error", "never"],
+    "import/no-unresolved": "off",
+    "import/extensions": "off",
+    "react/jsx-max-props-per-line": ["error", { "maximum": 1 }],
+    "class-methods-use-this": "off",
+    "function-paren-newline": ["error", "consistent"],
+    "lines-between-class-members": ["error", "always"],
+    "no-multiple-empty-lines": ["error", { "max": 1 }],
+    "object-curly-newline": ["error", { "consistent": true }],
+    "react/jsx-filename-extension": ["error", { "extensions": [".tsx"] }],
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "import/no-extraneous-dependencies": "off"
+  }
+}
