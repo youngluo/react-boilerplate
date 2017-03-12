@@ -1,9 +1,14 @@
-import React,{ Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
+import AddTodo from '../../containers/addTodo';
+import VisibleTodoList from '../../containers/visibleTodoList';
 
 class Dashboard extends Component {
     render() {
         return (
-            <h1>Dashboard</h1>
+            <div>
+                <AddTodo />
+                <VisibleTodoList />
+            </div>
         )
     }
 }
