@@ -3,18 +3,18 @@ import { Router, Route, Redirect, IndexRedirect, hashHistory } from 'react-route
 import Root from '../components/layout';
 import dashboard from '../pages/dashboard';
 
-// const chooseProducts = (location, cb) => {
-//     require.ensure([], require => {
-//         cb(null, require('../Component/chooseProducts').default)
-//     }, 'chooseProducts')
-// }
+const user = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('../pages/user').default)
+    }, 'user')
+}
 
 const RouteConfig = (
     <Router history={hashHistory}>
         <Route path="/" component={Root}>
             <IndexRedirect to="dashboard" />
             <Route path="dashboard" component={dashboard} />
-            {/*<Route path="applyRecord" getComponent={applyRecord} />*/}
+            <Route path="user" getComponent={user} />
             <Redirect from='*' to='/' />
         </Route>
     </Router>

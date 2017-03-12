@@ -9,13 +9,13 @@ class Root extends Component {
         return (
             <Layout>
                 <Header> </Header>
-                <Layout>
+                <Layout className='ant-layout-has-sider'>
                     <Nav></Nav>
-                    <Content>
+                    <Content style={{ padding: 30, backgroundColor: '#fff' }}>
                         {this.props.children}
                     </Content>
                 </Layout>
-            </Layout>
+            </Layout >
         );
     }
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import navData from './navData.js';
 import { Layout, Menu, Icon } from 'antd';
 
@@ -7,15 +8,15 @@ const { Sider } = Layout;
 class Nav extends Component {
     render() {
         return (
-            <Sider>
-                <Menu>
+            <Sider width={200} style={{ backgroundColor: '#fff' }}>
+                <Menu style={{ height: '100%' }} mode={'inline'} defaultSelectedKeys={['dashboard']}>
                     {navData.map(function (item) {
                         return (
                             <Menu.Item key={item.name}>
-                                <span>
+                                <Link to={item.name}>
                                     <Icon type={item.icon}></Icon>
                                     <span>{item.title}</span>
-                                </span>
+                                </Link>
                             </Menu.Item>
                         )
                     })}
