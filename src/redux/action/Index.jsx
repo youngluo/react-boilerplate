@@ -9,10 +9,10 @@ export const addTodo = (text) => {
     }
 }
 
-export const setVisibility = (showType) => {
+export const setVisibility = (filterType) => {
     return {
         type: 'SET_VISIBILITY',
-        showType
+        filterType
     }
 }
 

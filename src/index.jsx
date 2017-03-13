@@ -7,7 +7,7 @@ import store from './redux/store';
 import './index.scss';
 
 // store.subscribe(() => { //监听state变化
-//     //console.log(store.getState())
+//     console.log(store.getState())
 // });
 
 ReactDOM.render(

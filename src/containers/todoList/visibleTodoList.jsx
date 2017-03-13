@@ -1,15 +1,17 @@
 import { connect } from 'react-redux';
-import { toggleTodo } from '../redux/action';
-import todoList from '../components/todoList';
+import { toggleTodo } from '../../redux/action';
+import { TodoList } from '../../components/todoList';
 
-const getVisibleTodos = (todos, showType) => {
-    switch (showType) {
-        case 'SHOW_ALL':
+const getVisibleTodos = (todos, filterType) => {
+    switch (filterType) {
+        case 'ALL':
             return todos;
-        case 'SHOW_COMPLETED':
+        case 'DONE':
             return todos.filter(todo => todo.completed);
-        case 'SHOW_ACTIVE':
+        case 'TODO':
             return todos.filter(todo => !todo.completed);
+        default:
+            throw new Error('Unknown type ' + filterType);
     }
 }
 
@@ -27,9 +29,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-const visibleTodoList = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(todoList);
-
-export default visibleTodoList;
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
