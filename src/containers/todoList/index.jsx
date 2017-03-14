@@ -7,8 +7,8 @@ const TodoList = () => {
     return (
         <div className='todo-list'>
             <AddTodo />
-            <VisibleTodoList />
             <Footer />
+            <VisibleTodoList />
         </div>
     )
 }

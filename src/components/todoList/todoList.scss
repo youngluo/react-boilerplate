@@ -1,8 +1,16 @@
+.todo-list {
+    width: 300px;
+    margin: 0 auto;
+    .ant-input-group-addon {
+        padding: 0;
+    }
+}
+
 .todo-list-footer {
     li {
         display: inline-block;
-        margin-left: 15px;
-        margin-top: 20px;
+        margin: 10px 0 10px 30px;
+        padding: 0 3px;
         cursor: pointer;
         &:first-child {
             margin-left: 0;

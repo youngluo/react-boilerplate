@@ -2,7 +2,13 @@ import { connect } from 'react-redux';
 import { Footer } from '../../components/todoList';
 import { setVisibility } from '../../redux/action';
 
-Footer.defaultProps = { visibilityFilters: ['TODO', 'DONE','ALL'] };
+Footer.defaultProps = { visibilityFilters: ['ALL', 'TODO', 'DONE'] };
+
+const mapStateToProps = (state) => {
+    return {
+        curFilterType: state.visibilityFilter
+    }
+}
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -12,4 +18,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(Footer);
+export default connect(mapStateToProps, mapDispatchToProps)(Footer);
