@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import routes from './router'; //路由配置
 import store from './redux/store';
+import Routes from './router';
+import { AppContainer } from 'react-hot-loader';
 
 import './index.scss';
 
@@ -10,10 +11,21 @@ import './index.scss';
 //     console.log(store.getState())
 // });
 
-ReactDOM.render(
-    <Provider store={store}>
-        {routes}
-    </Provider>,
-    document.getElementById('app')
-);
+const render = (() => {
+    ReactDOM.render(
+        <AppContainer>
+            <Provider store={store}>
+                <Routes />
+            </Provider>
+        </AppContainer>,
+        document.getElementById('app')
+    );
+})();
+
+// Hot Module Replacement API
+if (module.hot) {
+    module.hot.accept('./router', () => {
+        render();
+    });
+}
 

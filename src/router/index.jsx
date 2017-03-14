@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import { Router, Route, Redirect, IndexRedirect, hashHistory } from 'react-router';
 import Root from '../components/layout';
 import dashboard from '../pages/dashboard';
@@ -9,7 +9,7 @@ const user = (location, cb) => {
     }, 'user')
 }
 
-const RouteConfig = (
+const Routes = () => (
     <Router history={hashHistory}>
         <Route path="/" component={Root}>
             <IndexRedirect to="dashboard" />
@@ -20,4 +20,4 @@ const RouteConfig = (
     </Router>
 );
 
-export default RouteConfig;
+export default Routes;

@@ -16,7 +16,11 @@ module.exports = function (env) {
     return {
         devtool: 'source-map',
         entry: {
-            app: ENTRY_FILE
+            app: [
+                'react-hot-loader/patch',
+                 'webpack-dev-server/client?http://localhost:8000',
+                'webpack/hot/only-dev-server',
+                ENTRY_FILE]
         },
         output: {
             //publicPath: 'dist', //编译好的文件，在服务器的路径,这是静态资源引用路径
@@ -77,7 +81,9 @@ module.exports = function (env) {
                 template: TEMPLATE_FILE, //html模板路径
                 hash: false,
             }),
-            new ExtractTextPlugin('css/[name].[chunkhash:8].css')
+            new ExtractTextPlugin('css/[name].[chunkhash:8].css'),
+            new webpack.HotModuleReplacementPlugin(),
+            new webpack.NamedModulesPlugin(),
         ],
         resolve: {
             extensions: ['.js', '.jsx', '.less', '.scss', '.css'], //后缀名自动补全
@@ -85,7 +91,8 @@ module.exports = function (env) {
         devServer: {
             contentBase: BUILD_PATH,
             compress: true,
-            port: 8000
+            port: 8000,
+            hot: true
         }
     }
 }

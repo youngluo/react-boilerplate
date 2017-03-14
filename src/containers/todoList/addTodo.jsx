@@ -3,6 +3,7 @@ import { Input, Button } from 'antd';
 import { connect } from 'react-redux';
 import { addTodo } from '../../redux/action';
 
+
 class AddTodo extends Component {
     constructor(props) {
         super(props);
@@ -21,7 +22,11 @@ class AddTodo extends Component {
         const buttonAfter = (<Button style={{ borderRadius: 0 }} type='primary' onClick={this.submit}>add</Button>);
         return (
             <div>
-                <Input size="large" value={this.state.value} addonAfter={buttonAfter} onChange={(e) => this.setState({ value: e.target.value })} />
+                <Input
+                    size="large"
+                    value={this.state.value}
+                    addonAfter={buttonAfter}
+                    onChange={(e) => this.setState({ value: e.target.value })} />
             </div>
         )
     }
