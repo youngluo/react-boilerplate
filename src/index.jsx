@@ -2,8 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './redux/store';
-import Routes from './router';
-import { AppContainer } from 'react-hot-loader';
+import Routing from './router';
 
 import './index.scss';
 
@@ -11,21 +10,14 @@ import './index.scss';
 //     console.log(store.getState())
 // });
 
-const render = (() => {
-    ReactDOM.render(
-        <AppContainer>
-            <Provider store={store}>
-                <Routes />
-            </Provider>
-        </AppContainer>,
-        document.getElementById('app')
-    );
-})();
+ReactDOM.render(
+    <Provider store={store}>
+        <Routing />
+    </Provider>,
+    document.getElementById('app')
+)
 
-// Hot Module Replacement API
 if (module.hot) {
-    module.hot.accept('./router', () => {
-        render();
-    });
+    module.hot.accept();
 }
 

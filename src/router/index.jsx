@@ -9,7 +9,7 @@ const user = (location, cb) => {
     }, 'user')
 }
 
-const Routes = () => (
+const Routing = () => (
     <Router history={hashHistory}>
         <Route path="/" component={Root}>
             <IndexRedirect to="dashboard" />
@@ -20,4 +20,4 @@ const Routes = () => (
     </Router>
 );
 
-export default Routes;
+export default Routing;
