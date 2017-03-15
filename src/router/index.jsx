@@ -9,15 +9,13 @@ const user = (location, cb) => {
     }, 'user')
 }
 
-const Routing = () => (
-    <Router history={hashHistory}>
-        <Route path="/" component={Root}>
-            <IndexRedirect to="dashboard" />
-            <Route path="dashboard" component={dashboard} />
-            <Route path="user" getComponent={user} />
-            <Redirect from='*' to='/' />
-        </Route>
-    </Router>
+const routes = (
+    <Route path="/" component={Root}>
+        <IndexRedirect to="dashboard" />
+        <Route path="dashboard" component={dashboard} />
+        <Route path="user" getComponent={user} />
+        <Redirect from='*' to='/' />
+    </Route>
 );
 
-export default Routing;
+export default () => <Router history={hashHistory} routes={routes} />;

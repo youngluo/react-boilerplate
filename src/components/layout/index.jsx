@@ -1,6 +1,7 @@
 import React from 'react';
 import Nav from '../nav';
 import { Layout } from 'antd';
+import Loading from '../../containers/loading';
 
 const { Header, Content } = Layout;
 
@@ -13,6 +14,7 @@ const Root = (props) => {
                 <Nav></Nav>
                 <Content style={{ padding: 30, backgroundColor: '#fff' }}>
                     {props.children}
+                    <Loading />
                 </Content>
             </Layout>
         </Layout >
