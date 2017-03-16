@@ -1,20 +1,17 @@
 require('es6-promise').polyfill();
 import axios from 'axios';
+import store from '../redux/store';
+import { setLoading } from '../redux/action';
 
-axios.interceptors.request.use(function (config) {
-    // Do something before request is sent
+axios.interceptors.request.use((config) => {
+    store.dispatch(setLoading(true));
     return config;
-}, function (error) {
-    return Promise.reject(error);
-});
+}, (error) => Promise.reject(error));
 
-axios.interceptors.response.use(function (response) {
-    // Do something with response data
-    
-    return response;
-}, function (error) {
-    return Promise.reject(error);
-});
+axios.interceptors.response.use((response) => {
+    store.dispatch(setLoading(false));
+    return response.data;
+}, (error) => Promise.reject(error));
 
 const get = (url, config) => axios.get(url, config);
 

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Table } from 'antd';
+import http from '../../services/http';
+import API from '../../config/api.config';
 
 class User extends Component {
     columns = [
@@ -17,6 +19,9 @@ class User extends Component {
         }
     ]
     componentDidMount() {
+        http.get(API.getUsers).then((reponse) => {
+            console.log(reponse)
+        })
     }
 
     render() {

@@ -7,5 +7,5 @@ let store = createStore(
     combineReducers(reducers),
     applyMiddleware(thunk)
 );
-
+console.log(store)
 export default store;
