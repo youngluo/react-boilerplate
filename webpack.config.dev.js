@@ -25,51 +25,59 @@ module.exports = {
         publicPath: '/'
     },
     module: {
-        rules: [{
-            test: /\.js$/,
-            exclude: NODE_MODULES_PATH,
-            use: 'babel-loader',
-            include: APP_PATH
-        }, {
-            test: /\.css$/,
-            exclude: NODE_MODULES_PATH,
-            use: ExtractTextPlugin.extract(['css-loader', 'autoprefixer-loader']),
-            include: APP_PATH
-        }, {
-            test: /\.less$/,
-            use: ExtractTextPlugin.extract(['css-loader', 'autoprefixer-loader', 'less-loader']),
-        }, {
-            test: /\.scss$/,
-            exclude: NODE_MODULES_PATH,
-            use: ExtractTextPlugin.extract(['css-loader', 'autoprefixer-loader', 'sass-loader']),
-            include: APP_PATH
-        }, {
-            test: /\.(eot|woff|svg|ttf|woff2|gif)(\?|$)/,
-            exclude: NODE_MODULES_PATH,
-            use: {
-                loader: 'file-loader',
-                options: {
-                    name: '[name].[ext]'
-                }
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: NODE_MODULES_PATH,
+                use: 'babel-loader',
+                include: APP_PATH
             },
-            include: APP_PATH
-        }, {
-            test: /\.(png|jpg)$/,
-            exclude: NODE_MODULES_PATH,
-            use: {
-                loader: 'url-loader',
-                options: {
-                    limit: 8192, //limit的参数，当你图片大小小于这个限制的时候，会自动启用base64编码图片
-                    name: 'images/[name].[hash:8].[ext]'
-                }
+            {
+                test: /\.css$/,
+                exclude: NODE_MODULES_PATH,
+                use: ExtractTextPlugin.extract(['css-loader', 'autoprefixer-loader']),
+                include: APP_PATH
             },
-            include: APP_PATH
-        }, {
-            test: /\.jsx$/,
-            exclude: NODE_MODULES_PATH,
-            use: ['jsx-loader', 'babel-loader'],
-            include: APP_PATH
-        }]
+            {
+                test: /\.less$/,
+                use: ExtractTextPlugin.extract(['css-loader', 'autoprefixer-loader', 'less-loader']),
+            },
+            {
+                test: /\.scss$/,
+                exclude: NODE_MODULES_PATH,
+                use: ExtractTextPlugin.extract(['css-loader', 'autoprefixer-loader', 'sass-loader']),
+                include: APP_PATH
+            },
+            {
+                test: /\.(eot|woff|svg|ttf|woff2|gif)(\?|$)/,
+                exclude: NODE_MODULES_PATH,
+                use: {
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]'
+                    }
+                },
+                include: APP_PATH
+            },
+            {
+                test: /\.(png|jpg)$/,
+                exclude: NODE_MODULES_PATH,
+                use: {
+                    loader: 'url-loader',
+                    options: {
+                        limit: 8192, //limit的参数，当你图片大小小于这个限制的时候，会自动启用base64编码图片
+                        name: 'images/[name].[hash:8].[ext]'
+                    }
+                },
+                include: APP_PATH
+            },
+            {
+                test: /\.jsx$/,
+                exclude: NODE_MODULES_PATH,
+                use: ['jsx-loader', 'babel-loader'],
+                include: APP_PATH
+            }
+        ]
     },
     plugins: [
         new HtmlWebpackPlugin({  //根据模板插入css/js等生成最终HTML
@@ -79,7 +87,7 @@ module.exports = {
         }),
         new ExtractTextPlugin('css/[name].[chunkhash:8].css'),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NamedModulesPlugin(),
+        new webpack.NamedModulesPlugin()
     ],
     resolve: {
         extensions: ['.js', '.jsx', '.less', '.scss', '.css'], //后缀名自动补全

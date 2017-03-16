@@ -21,3 +21,12 @@ body,
         margin-top: 10px;
     }
 }
+
+.ant-table table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    text-align: left;
+    border-radius: 4px 4px 0 0;
+    overflow: hidden;
+}

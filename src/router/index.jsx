@@ -1,9 +1,9 @@
 import React from 'react';
 import { Router, Route, Redirect, IndexRedirect, hashHistory } from 'react-router';
 import Root from '../components/layout';
-import dashboard from '../pages/dashboard';
+import Dashboard from '../pages/dashboard';
 
-const user = (location, cb) => {
+const User = (location, cb) => {
     require.ensure([], require => {
         cb(null, require('../pages/user').default)
     }, 'user')
@@ -12,8 +12,8 @@ const user = (location, cb) => {
 const routes = (
     <Route path="/" component={Root}>
         <IndexRedirect to="dashboard" />
-        <Route path="dashboard" component={dashboard} />
-        <Route path="user" getComponent={user} />
+        <Route path="dashboard" component={Dashboard} />
+        <Route path="user" getComponent={User} />
         <Redirect from='*' to='/' />
     </Route>
 );
