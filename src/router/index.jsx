@@ -9,11 +9,18 @@ const User = (location, cb) => {
     }, 'user')
 }
 
+const Article = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('../pages/article').default)
+    }, 'article')
+}
+
 const routes = (
     <Route path="/" component={Root}>
         <IndexRedirect to="dashboard" />
         <Route path="dashboard" component={Dashboard} />
         <Route path="user" getComponent={User} />
+        <Route path="article" getComponent={Article} />
         <Redirect from='*' to='/' />
     </Route>
 );

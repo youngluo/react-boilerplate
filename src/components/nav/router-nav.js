@@ -9,6 +9,11 @@ const data = [
         icon: 'user',
         title: '用户'
     },
+    {
+        name: 'article',
+        icon: 'user',
+        title: '文章'
+    },
 ];
 
 export default data;

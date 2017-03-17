@@ -3,7 +3,7 @@ import { Table } from 'antd';
 import { getData } from '../../redux/action';
 import API from '../../config/api.config';
 
-class User extends Component {
+class Article extends Component {
     //必须指定contextTypes才能从context拿到store
     static contextTypes = {
         store: React.PropTypes.object
@@ -15,16 +15,20 @@ class User extends Component {
             dataIndex: 'id'
         },
         {
-            title: '姓名',
-            dataIndex: 'name'
+            title: '标题',
+            dataIndex: 'title'
         },
         {
-            title: '年龄',
-            dataIndex: 'age'
+            title: '创建人',
+            dataIndex: 'name'
         },
         {
             title: '创建时间',
             dataIndex: 'create_time'
+        },
+        {
+            title: '更新时间',
+            dataIndex: 'update_time'
         }
     ];
 
@@ -32,7 +36,7 @@ class User extends Component {
 
     getComponentData() {
         const { dispatch } = this.store;
-        dispatch(getData(API.getUsers));
+        dispatch(getData(API.getArticles));
     }
 
     componentDidMount() {
@@ -51,4 +55,4 @@ class User extends Component {
     }
 }
 
-export default User;
+export default Article;

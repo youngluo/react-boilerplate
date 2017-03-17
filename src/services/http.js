@@ -10,7 +10,7 @@ axios.interceptors.request.use((config) => {
 
 axios.interceptors.response.use((response) => {
     store.dispatch(setLoading(false));
-    return response.data;
+    return response.data.data;
 }, (error) => Promise.reject(error));
 
 const get = (url, config) => axios.get(url, config);

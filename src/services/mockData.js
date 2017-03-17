@@ -14,3 +14,17 @@ Mock.mock(`${apiDomain}/getUsers`, {
     ],
     'message': '数据获取成功'
 });
+
+Mock.mock(`${apiDomain}/getArticles`, {
+    'success': true,
+    'data|5-10': [
+        {
+            'id|+1': 0,
+            'title': '@cword(8,16)',
+            'name': '@cname',
+            'create_time': '@now',
+            'update_time': '@now'
+        }
+    ],
+    'message': '数据获取成功'
+});
