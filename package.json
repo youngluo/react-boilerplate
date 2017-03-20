@@ -5,7 +5,7 @@
   "main": "",
   "scripts": {
     "dev": "node server.js",
-    "prod": "rm -rf dist && webpack --env.production --progress --colors"
+    "prod": "rm -rf dist && webpack --config webpack.config.prod.js --progress --colors"
   },
   "repository": {
     "type": "github",

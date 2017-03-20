@@ -10,19 +10,26 @@ const ROOT_PATH = path.resolve(__dirname), //项目根目录
     ENTRY_FILE = path.resolve(APP_PATH, 'index'), //入口文件地址
     TEMPLATE_FILE = path.resolve(APP_PATH, 'index.html'); //html模板文件地址
 
+
 module.exports = {
-    devtool: 'source-map',
     entry: {
-        app: [
-            'webpack-hot-middleware/client',
-            ENTRY_FILE
+        app: ENTRY_FILE,
+        vendor: [
+            "react",
+            'react-dom',
+            'react-router',
+            'redux',
+            'react-redux',
+            'redux-thunk',
+            'axios',
+            'es6-promise',
+            'antd'
         ]
     },
     output: {
         path: BUILD_PATH, //编译到当前目录
         filename: 'js/[name].[hash:8].js', //编译后的文件名字
-        chunkFilename: '[name].[chunkhash:8].js',
-        publicPath: '/'
+        chunkFilename: 'js/[name].[chunkhash:8].js'
     },
     module: {
         rules: [
@@ -35,17 +42,17 @@ module.exports = {
             {
                 test: /\.css$/,
                 exclude: NODE_MODULES_PATH,
-                use: ExtractTextPlugin.extract(['css-loader', 'autoprefixer-loader']),
+                use: ExtractTextPlugin.extract(['css-loader?minimize=true', 'autoprefixer-loader']),
                 include: APP_PATH
             },
             {
                 test: /\.less$/,
-                use: ExtractTextPlugin.extract(['css-loader', 'autoprefixer-loader', 'less-loader']),
+                use: ExtractTextPlugin.extract(['css-loader?minimize=true', 'autoprefixer-loader', 'less-loader']),
             },
             {
                 test: /\.scss$/,
                 exclude: NODE_MODULES_PATH,
-                use: ExtractTextPlugin.extract(['css-loader', 'autoprefixer-loader', 'sass-loader']),
+                use: ExtractTextPlugin.extract(['css-loader?minimize=true', 'autoprefixer-loader', 'sass-loader']),
                 include: APP_PATH
             },
             {
@@ -80,19 +87,35 @@ module.exports = {
         ]
     },
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify('production') //定义生产环境
+            }
+        }),
         new HtmlWebpackPlugin({  //根据模板插入css/js等生成最终HTML
             filename: path.resolve(BUILD_PATH, 'index.html'), //生成的html存放路径
             template: TEMPLATE_FILE, //html模板路径
             hash: false,
         }),
+        new webpack.optimize.UglifyJsPlugin({
+            output: {
+                comments: false, // 移除所有注释
+            },
+            compress: {
+                warnings: false,
+                drop_console: true
+            }
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            filename: 'js/[name].[hash:8].js'
+        }),
         new ExtractTextPlugin({
             filename: 'css/[name].[chunkhash:8].css',
             allChunks: true
-        }),
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NamedModulesPlugin()
+        })
     ],
     resolve: {
-        extensions: ['.js', '.jsx', '.less', '.scss', '.css'], //后缀名自动补全
+        extensions: ['.js', '.jsx', '.less', '.scss', '.css'] //后缀名自动补全
     }
-}
+};
