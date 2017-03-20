@@ -9,6 +9,7 @@ const ROOT_PATH = path.resolve(__dirname), //项目根目录
     NODE_MODULES_PATH = path.resolve(ROOT_PATH, 'node_modules'), //node_modules目录
     ENTRY_FILE = path.resolve(APP_PATH, 'index'), //入口文件地址
     TEMPLATE_FILE = path.resolve(APP_PATH, 'index.html'); //html模板文件地址
+// CSS_SCOPE = 'modules&localIdentName=[name]__[local]___[hash:base64:6]';
 
 module.exports = {
     devtool: 'source-map',
