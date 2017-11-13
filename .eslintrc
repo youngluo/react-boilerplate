@@ -1,0 +1,28 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 7,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "es6": true,
+    "node": true,
+    "browser": true
+  },
+  // 脚本在执行期间访问的额外的全局变量
+  "globals": {
+    "document": true,
+    "navigator": true,
+    "window": true,
+    "node": true
+  },
+  "extends": "airbnb",
+  "plugins": ["react", "jsx-a11y", "import"],
+  // 定义自己的规则
+  "rules": {
+    "comma-dangle": ["error", "never"],
+    "indent": ["error", 2]
+  }
+}

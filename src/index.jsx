@@ -10,13 +10,12 @@ import './index.scss';
 // });
 
 ReactDOM.render(
-    <Provider store={store}>
-        <Routers />
-    </Provider>,
-    document.getElementById('app')
-)
+  <Provider store={store}>
+    <Routers />
+  </Provider>,
+  document.getElementById('app')
+);
 
 if (module.hot) {
-    module.hot.accept();
+  module.hot.accept();
 }
-
