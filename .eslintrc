@@ -23,6 +23,9 @@
   // 定义自己的规则
   "rules": {
     "comma-dangle": ["error", "never"],
-    "indent": ["error", 2]
+    "indent": ["error", 2],
+    "import/no-unresolved": "off",
+    "import/extensions": "off",
+    "import/no-extraneous-dependencies": "off",
   }
 }

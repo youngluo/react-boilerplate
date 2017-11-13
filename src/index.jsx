@@ -1,8 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import ReactDOM from 'react-dom';
+import React from 'react';
+import Router from './config/router.config';
 import store from './redux/store';
-import Routers from './router';
 import './index.scss';
 
 // store.subscribe(() => { //监听state变化
@@ -11,7 +11,7 @@ import './index.scss';
 
 ReactDOM.render(
   <Provider store={store}>
-    <Routers />
+    <Router />
   </Provider>,
   document.getElementById('app')
 );
