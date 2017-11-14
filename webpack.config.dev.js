@@ -14,7 +14,18 @@ const TEMPLATE_FILE = path.resolve(APP_PATH, 'index.html'); // html模板文件�
 module.exports = {
   devtool: 'source-map',
   entry: {
-    app: ['webpack-hot-middleware/client', ENTRY_FILE]
+    app: ['webpack-hot-middleware/client', ENTRY_FILE],
+    vendor: [
+      'react',
+      'react-dom',
+      'react-router-dom',
+      'redux',
+      'react-redux',
+      'redux-thunk',
+      'axios',
+      'es6-promise',
+      'antd'
+    ]
   },
   output: {
     path: BUILD_PATH, // 编译到当前目录
@@ -96,6 +107,7 @@ module.exports = {
     alias: {
       containers: path.resolve(APP_PATH, 'containers'),
       components: path.resolve(APP_PATH, 'components'),
+      config: path.resolve(APP_PATH, 'config'),
       pages: path.resolve(APP_PATH, 'pages'),
       ui: 'antd'
     }

@@ -1,12 +1,5 @@
-import TodoList from 'containers/todoList';
-import React from 'react';
-
 function Dashboard() {
-  return (
-    <div className="dashboard">
-      <TodoList />
-    </div>
-  );
+  return 'dashboard';
 }
 
 export default Dashboard;

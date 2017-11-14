@@ -1,5 +1,7 @@
-export default {
-  name: 'dashboard',
-  path: '/dashboard',
-  component: require('./index')
-};
+export default [
+  {
+    name: 'dashboard',
+    path: '/dashboard',
+    component: require('bundle-loader?lazy!./index')
+  }
+];
