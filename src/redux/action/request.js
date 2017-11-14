@@ -1,18 +1,12 @@
-import http from '../../services/http';
+import http from '../../config/http.config';
 
-const getResponse = (res) => {
-    return {
-        type: 'RESPONSE',
-        data: res
-    }
-}
+const getResponse = res => ({
+  type: 'RESPONSE',
+  data: res
+});
 
-export const getData = (url, config) => {
-    return (dispatch) => {
-        return http.get(url, config)
-            .then(response => {
-                dispatch(getResponse(response));
-            })
-            .catch(error => console.log(error))
-    }
-}
+export const getData = (url, config) => dispatch => http.get(url, config)
+  .then((response) => {
+    dispatch(getResponse(response));
+  })
+  .catch(error => console.log(error));

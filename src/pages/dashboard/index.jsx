@@ -1,14 +1,12 @@
-import React, { Component, PropTypes } from 'react';
-import TodoList from '../../containers/todoList';
+import TodoList from 'containers/todoList';
+import React from 'react';
 
-class Dashboard extends Component {
-    render() {
-        return (
-            <div className='dashboard'>
-                <TodoList />
-            </div>
-        )
-    }
+function Dashboard() {
+  return (
+    <div className="dashboard">
+      <TodoList />
+    </div>
+  );
 }
 
 export default Dashboard;

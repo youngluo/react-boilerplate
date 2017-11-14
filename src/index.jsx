@@ -1,7 +1,7 @@
 import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
 import React from 'react';
-import Router from './config/router.config';
+import Layout from 'components/Layout';
 import store from './redux/store';
 import './index.scss';
 
@@ -11,7 +11,7 @@ import './index.scss';
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router />
+    <Layout />
   </Provider>,
   document.getElementById('app')
 );

@@ -94,7 +94,10 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.less', '.scss', '.css'], // 后缀名自动补全
     alias: {
-      components: path.resolve(APP_PATH, 'components')
+      containers: path.resolve(APP_PATH, 'containers'),
+      components: path.resolve(APP_PATH, 'components'),
+      pages: path.resolve(APP_PATH, 'pages'),
+      ui: 'antd'
     }
   }
 };
