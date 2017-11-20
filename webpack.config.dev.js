@@ -1,115 +1,22 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin'); // css单独打包
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const configBase = require('./webpack.config.base');
 const webpack = require('webpack');
-const path = require('path');
+const _ = require('lodash');
 
-const ROOT_PATH = path.resolve(__dirname); // 项目根目录
-const APP_PATH = path.resolve(ROOT_PATH, 'src'); // 项目源代码目录
-const BUILD_PATH = path.resolve(ROOT_PATH, 'dist'); // 发布文件存放目录
-const NODE_MODULES_PATH = path.resolve(ROOT_PATH, 'node_modules'); // node_modules目录
-const ENTRY_FILE = path.resolve(APP_PATH, 'index'); // 入口文件地址
-const TEMPLATE_FILE = path.resolve(APP_PATH, 'index.html'); // html模板文件地址
-// CSS_SCOPE = 'modules&localIdentName=[name]__[local]___[hash:base64:6]';
+const baseConfig = configBase(false); // dev
 
-module.exports = {
-  devtool: 'source-map',
-  entry: {
-    app: ['webpack-hot-middleware/client', ENTRY_FILE],
-    vendor: [
-      'react',
-      'react-dom',
-      'react-router-dom',
-      'redux',
-      'react-redux',
-      'redux-thunk',
-      'axios',
-      'es6-promise',
-      'antd'
-    ]
-  },
-  output: {
-    path: BUILD_PATH, // 编译到当前目录
-    filename: 'js/[name].[hash:8].js', // 编译后的文件名字
-    chunkFilename: '[name].[chunkhash:8].js',
-    publicPath: '/'
-  },
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: NODE_MODULES_PATH,
-        use: 'babel-loader',
-        include: APP_PATH
-      },
-      {
-        test: /\.css$/,
-        exclude: NODE_MODULES_PATH,
-        use: ExtractTextPlugin.extract(['css-loader', 'autoprefixer-loader']),
-        include: APP_PATH
-      },
-      {
-        test: /\.less$/,
-        use: ExtractTextPlugin.extract(['css-loader', 'autoprefixer-loader', 'less-loader'])
-      },
-      {
-        test: /\.scss$/,
-        exclude: NODE_MODULES_PATH,
-        use: ExtractTextPlugin.extract(['css-loader', 'autoprefixer-loader', 'sass-loader']),
-        include: APP_PATH
-      },
-      {
-        test: /\.(eot|woff|ttf|woff2)(\?|$)/,
-        exclude: NODE_MODULES_PATH,
-        use: {
-          loader: 'file-loader',
-          options: {
-            name: '[name].[ext]'
-          }
-        },
-        include: APP_PATH
-      },
-      {
-        test: /\.(png|jpg|gif|svg)$/,
-        exclude: NODE_MODULES_PATH,
-        use: {
-          loader: 'url-loader',
-          options: {
-            limit: 8192, // limit的参数，当你图片大小小于这个限制的时候，会自动启用base64编码图片
-            name: 'images/[name].[hash:8].[ext]'
-          }
-        },
-        include: APP_PATH
-      },
-      {
-        test: /\.jsx$/,
-        exclude: NODE_MODULES_PATH,
-        use: ['jsx-loader', 'babel-loader'],
-        include: APP_PATH
-      }
-    ]
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      // 根据模板插入css/js等生成最终HTML
-      filename: path.resolve(BUILD_PATH, 'index.html'), // 生成的html存放路径
-      template: TEMPLATE_FILE, // html模板路径
-      hash: false
-    }),
-    new ExtractTextPlugin({
-      filename: 'css/[name].[chunkhash:8].css',
-      allChunks: true
-    }),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin()
-  ],
-  resolve: {
-    extensions: ['.js', '.jsx', '.less', '.scss', '.css'], // 后缀名自动补全
-    alias: {
-      containers: path.resolve(APP_PATH, 'containers'),
-      components: path.resolve(APP_PATH, 'components'),
-      config: path.resolve(APP_PATH, 'config'),
-      pages: path.resolve(APP_PATH, 'pages'),
-      ui: 'antd'
+baseConfig.plugins = baseConfig.plugins.concat([
+  new webpack.DefinePlugin({
+    'process.env': {
+      NODE_ENV: JSON.stringify('development')
     }
+  }),
+  new webpack.HotModuleReplacementPlugin(),
+  new webpack.NamedModulesPlugin()
+]);
+
+module.exports = _.merge(baseConfig, {
+  devtool: 'source-map',
+  output: {
+    publicPath: '/'
   }
-};
+});
