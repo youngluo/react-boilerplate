@@ -4,9 +4,8 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import 'config/http.config.js';
 import store from './redux/store';
+import 'babel-polyfill';
 import './index.scss';
-
-require('es6-promise').polyfill();
 
 // store.subscribe(() => { //监听state变化
 //     console.log(store.getState())

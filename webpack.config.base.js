@@ -1,5 +1,6 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin'); // css单独打包
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const autoprefixer = require('autoprefixer');
 const path = require('path');
 
 const ROOT_PATH = path.resolve(__dirname); // 项目根目录
@@ -15,9 +16,9 @@ module.exports = isProd => ({
     app: isProd ? ENTRY_FILE : ['webpack-hot-middleware/client', ENTRY_FILE],
     vendor: [
       'react-router-dom',
+      'babel-polyfill',
       'react-redux',
       'redux-thunk',
-      'es6-promise',
       'react-dom',
       'axios',
       'redux',
@@ -34,50 +35,46 @@ module.exports = isProd => ({
     rules: [
       {
         test: /\.js$/,
+        include: APP_PATH,
         exclude: NODE_MODULES_PATH,
-        use: 'babel-loader',
-        include: APP_PATH
+        use: 'babel-loader'
       },
       {
         test: /\.css$/,
+        include: APP_PATH,
         exclude: NODE_MODULES_PATH,
-        use: ExtractTextPlugin.extract([
-          `css-loader${isProd ? '?minimize=true' : ''}`,
-          'autoprefixer-loader'
-        ]),
-        include: APP_PATH
+        use: isProd
+          ? ExtractTextPlugin.extract(['css-loader?minimize=true', 'postcss-loader'])
+          : ['style-loader', 'css-loader', 'postcss-loader']
       },
       {
         test: /\.less$/,
-        use: ExtractTextPlugin.extract([
-          `css-loader${isProd ? '?minimize=true' : ''}`,
-          'autoprefixer-loader',
-          'less-loader'
-        ])
+        use: isProd
+          ? ExtractTextPlugin.extract(['css-loader?minimize=true', 'postcss-loader', 'less-loader'])
+          : ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
       },
       {
         test: /\.scss$/,
+        include: APP_PATH,
         exclude: NODE_MODULES_PATH,
-        use: ExtractTextPlugin.extract([
-          `css-loader${isProd ? '?minimize=true' : ''}`,
-          'autoprefixer-loader',
-          'sass-loader'
-        ]),
-        include: APP_PATH
+        use: isProd
+          ? ExtractTextPlugin.extract(['css-loader?minimize=true', 'postcss-loader', 'sass-loader'])
+          : ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
       },
       {
         test: /\.(eot|woff|ttf|woff2)(\?|$)/,
+        include: APP_PATH,
         exclude: NODE_MODULES_PATH,
         use: {
           loader: 'file-loader',
           options: {
             name: '[name].[ext]'
           }
-        },
-        include: APP_PATH
+        }
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
+        include: APP_PATH,
         exclude: NODE_MODULES_PATH,
         use: {
           loader: 'url-loader',
@@ -85,14 +82,13 @@ module.exports = isProd => ({
             limit: 8192, // limit的参数，当你图片大小小于这个限制的时候，会自动启用base64编码图片
             name: 'images/[name].[hash:8].[ext]'
           }
-        },
-        include: APP_PATH
+        }
       },
       {
         test: /\.jsx$/,
+        include: APP_PATH,
         exclude: NODE_MODULES_PATH,
-        use: ['jsx-loader', 'babel-loader'],
-        include: APP_PATH
+        use: ['jsx-loader', 'babel-loader']
       }
     ]
   },
