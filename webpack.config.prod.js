@@ -1,9 +1,13 @@
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const configBase = require('./webpack.config.base');
 const webpack = require('webpack');
 
 const baseConfig = configBase(true); // prod
 
 baseConfig.plugins = baseConfig.plugins.concat([
+  new CleanWebpackPlugin(['./dist'], { verbose: true }),
   new webpack.DefinePlugin({
     'process.env': {
       NODE_ENV: JSON.stringify('production')
@@ -18,10 +22,11 @@ baseConfig.plugins = baseConfig.plugins.concat([
       drop_console: true
     }
   }),
-  new webpack.optimize.CommonsChunkPlugin({
-    name: 'vendor',
-    filename: 'js/[name].[hash:8].js'
-  })
+  new ExtractTextPlugin({
+    filename: 'css/[name].[chunkhash:8].css',
+    allChunks: true
+  }),
+  new BundleAnalyzerPlugin()
 ]);
 
 module.exports = baseConfig;

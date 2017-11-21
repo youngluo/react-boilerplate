@@ -1,6 +1,6 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const autoprefixer = require('autoprefixer');
+const webpack = require('webpack');
 const path = require('path');
 
 const ROOT_PATH = path.resolve(__dirname); // 项目根目录
@@ -28,7 +28,7 @@ module.exports = isProd => ({
   },
   output: {
     path: BUILD_PATH, // 编译到当前目录
-    filename: 'js/[name].[hash:8].js', // 编译后的文件名字
+    filename: 'js/[name].[chunkhash:8].js', // 编译后的文件名字
     chunkFilename: '[name].[chunkhash:8].js'
   },
   module: {
@@ -99,9 +99,9 @@ module.exports = isProd => ({
       template: TEMPLATE_FILE, // html模板路径
       hash: false
     }),
-    new ExtractTextPlugin({
-      filename: 'css/[name].[chunkhash:8].css',
-      allChunks: true
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: Infinity
     })
   ],
   resolve: {
