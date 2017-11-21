@@ -25,7 +25,7 @@ export default class Root extends Component {
       <Router>
         <Layout>
           <Sider trigger={null} collapsible collapsed={collapsed}>
-            <div className="logo" />
+            <div className="logo">{__APP_NAME__}</div>
             <Menu />
           </Sider>
           <Layout className="root-container">

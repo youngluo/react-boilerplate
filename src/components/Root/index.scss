@@ -3,6 +3,7 @@ body,
 #app,
 .ant-layout {
     height: 100%;
+    font-size: 14px;
 }
 
 .root-container {
@@ -23,4 +24,6 @@ body,
     margin: 16px;
     border-radius: 6px;
     background: #333;
+    color: #fff;
+    text-align: center;
 }

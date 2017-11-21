@@ -1,15 +1,17 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const packageInfo = require('./package.json');
+const api = require('./api.config');
 const webpack = require('webpack');
 const path = require('path');
-const api = require('./api.config');
 
+const { name: appName } = packageInfo;
 const ROOT_PATH = path.resolve(__dirname); // 项目根目录
 const APP_PATH = path.resolve(ROOT_PATH, 'src'); // 项目源代码目录
 const ENTRY_FILE = path.resolve(APP_PATH, 'index'); // 入口文件地址
 const BUILD_PATH = path.resolve(ROOT_PATH, 'dist'); // 发布文件存放目录
 const NODE_MODULES_PATH = path.resolve(ROOT_PATH, 'node_modules'); // node_modules目录
-const TEMPLATE_FILE = path.resolve(APP_PATH, 'index.html'); // html模板文件地址
+const TEMPLATE_FILE = path.resolve(APP_PATH, 'index.ejs'); // html模板文件地址
 // CSS_SCOPE = 'modules&localIdentName=[name]__[local]___[hash:base64:6]';
 
 module.exports = isBuild => ({
@@ -96,7 +98,7 @@ module.exports = isBuild => ({
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'react-redux',
+      title: appName,
       // 根据模板插入css/js等生成最终HTML
       filename: path.resolve(BUILD_PATH, 'index.html'), // 生成的html存放路径
       template: TEMPLATE_FILE, // html模板路径
@@ -106,7 +108,8 @@ module.exports = isBuild => ({
       ...api[process.env.API_ENV],
       'process.env': {
         NODE_ENV: JSON.stringify(isBuild ? 'production' : 'development')
-      }
+      },
+      __APP_NAME__: JSON.stringify(appName)
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',

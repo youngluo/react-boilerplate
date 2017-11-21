@@ -1,13 +1,13 @@
 const config = require('./webpack.config.dev.js');
 const webpack = require('webpack');
 const express = require('express');
+const opn = require('opn');
 
 const compiler = webpack(config);
 const app = express();
 
 const port = 3000;
 const url = `http://localhost:${port}`;
-
 
 app.use(require('webpack-dev-middleware')(compiler, {
   publicPath: config.output.publicPath,
@@ -27,5 +27,9 @@ app.listen(port, (err) => {
     return console.error(err); // eslint-disable-line
   }
 
-  return console.log(`Listening at ${url}`); // eslint-disable-line
+  console.info(`Listening at ${url}`); // eslint-disable-line
+
+  setTimeout(() => {
+    opn(url);
+  }, 2000);
 });
