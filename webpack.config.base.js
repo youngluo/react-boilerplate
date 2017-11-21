@@ -19,6 +19,7 @@ module.exports = isProd => ({
       'babel-polyfill',
       'react-redux',
       'redux-thunk',
+      'prop-types',
       'react-dom',
       'axios',
       'redux',
@@ -28,7 +29,7 @@ module.exports = isProd => ({
   },
   output: {
     path: BUILD_PATH, // 编译到当前目录
-    filename: 'js/[name].[chunkhash:8].js', // 编译后的文件名字
+    filename: `js/[name].[${isProd ? 'chunkhash' : 'hash'}:8].js`, // 编译后的文件名字
     chunkFilename: '[name].[chunkhash:8].js'
   },
   module: {
@@ -102,6 +103,10 @@ module.exports = isProd => ({
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: Infinity
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'manifest',
+      chunks: ['vendor', 'app']
     })
   ],
   resolve: {
