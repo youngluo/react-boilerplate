@@ -2,6 +2,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
+const api = require('./api.config');
 
 const ROOT_PATH = path.resolve(__dirname); // 项目根目录
 const APP_PATH = path.resolve(ROOT_PATH, 'src'); // 项目源代码目录
@@ -11,9 +12,9 @@ const NODE_MODULES_PATH = path.resolve(ROOT_PATH, 'node_modules'); // node_modul
 const TEMPLATE_FILE = path.resolve(APP_PATH, 'index.html'); // html模板文件地址
 // CSS_SCOPE = 'modules&localIdentName=[name]__[local]___[hash:base64:6]';
 
-module.exports = isProd => ({
+module.exports = isBuild => ({
   entry: {
-    app: isProd ? ENTRY_FILE : ['webpack-hot-middleware/client', ENTRY_FILE],
+    app: isBuild ? ENTRY_FILE : ['webpack-hot-middleware/client', ENTRY_FILE],
     vendor: [
       'react-router-dom',
       'babel-polyfill',
@@ -29,7 +30,7 @@ module.exports = isProd => ({
   },
   output: {
     path: BUILD_PATH, // 编译到当前目录
-    filename: `js/[name].[${isProd ? 'chunkhash' : 'hash'}:8].js`, // 编译后的文件名字
+    filename: `js/[name].[${isBuild ? 'chunkhash' : 'hash'}:8].js`, // 编译后的文件名字
     chunkFilename: '[name].[chunkhash:8].js'
   },
   module: {
@@ -44,13 +45,13 @@ module.exports = isProd => ({
         test: /\.css$/,
         include: APP_PATH,
         exclude: NODE_MODULES_PATH,
-        use: isProd
+        use: isBuild
           ? ExtractTextPlugin.extract(['css-loader?minimize=true', 'postcss-loader'])
           : ['style-loader', 'css-loader', 'postcss-loader']
       },
       {
         test: /\.less$/,
-        use: isProd
+        use: isBuild
           ? ExtractTextPlugin.extract(['css-loader?minimize=true', 'postcss-loader', 'less-loader'])
           : ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
       },
@@ -58,7 +59,7 @@ module.exports = isProd => ({
         test: /\.scss$/,
         include: APP_PATH,
         exclude: NODE_MODULES_PATH,
-        use: isProd
+        use: isBuild
           ? ExtractTextPlugin.extract(['css-loader?minimize=true', 'postcss-loader', 'sass-loader'])
           : ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
       },
@@ -69,7 +70,7 @@ module.exports = isProd => ({
         use: {
           loader: 'file-loader',
           options: {
-            name: '[name].[ext]'
+            name: 'fonts/[name].[hash:8].[ext]'
           }
         }
       },
@@ -95,10 +96,17 @@ module.exports = isProd => ({
   },
   plugins: [
     new HtmlWebpackPlugin({
+      title: 'react-redux',
       // 根据模板插入css/js等生成最终HTML
       filename: path.resolve(BUILD_PATH, 'index.html'), // 生成的html存放路径
       template: TEMPLATE_FILE, // html模板路径
       hash: false
+    }),
+    new webpack.DefinePlugin({
+      ...api[process.env.API_ENV],
+      'process.env': {
+        NODE_ENV: JSON.stringify(isBuild ? 'production' : 'development')
+      }
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
@@ -107,7 +115,8 @@ module.exports = isProd => ({
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
       chunks: ['vendor', 'app']
-    })
+    }),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
   ],
   resolve: {
     extensions: ['.js', '.jsx', '.less', '.scss', '.css'], // 后缀名自动补全

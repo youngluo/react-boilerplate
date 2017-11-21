@@ -3,11 +3,11 @@ const webpack = require('webpack');
 const express = require('express');
 
 const compiler = webpack(config);
-
 const app = express();
 
 const port = 3000;
 const url = `http://localhost:${port}`;
+
 
 app.use(require('webpack-dev-middleware')(compiler, {
   publicPath: config.output.publicPath,

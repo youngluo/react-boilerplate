@@ -8,8 +8,11 @@
     "ie >= 10"
   ],
   "scripts": {
-    "start": "node server.js",
-    "prod": "webpack --config webpack.config.prod.js --progress --colors"
+    "start": "cross-env API_ENV=mock node server.js",
+    "dev": "cross-env API_ENV=development node server.js",
+    "build:prod": "cross-env API_ENV=production webpack --config webpack.config.build.js --progress --colors",
+    "build:staging": "cross-env API_ENV=staging webpack --config webpack.config.build.js --progress --colors",
+    "build:dev": "cross-env API_ENV=development webpack --config webpack.config.build.js --progress --colors"
   },
   "repository": {
     "type": "github",
@@ -44,6 +47,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "bundle-loader": "^0.5.5",
     "clean-webpack-plugin": "^0.1.17",
+    "cross-env": "^5.1.1",
     "css-loader": "^0.28.7",
     "eslint": "^4.11.0",
     "eslint-config-airbnb": "^16.1.0",

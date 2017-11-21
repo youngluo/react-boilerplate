@@ -4,15 +4,10 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const configBase = require('./webpack.config.base');
 const webpack = require('webpack');
 
-const baseConfig = configBase(true); // prod
+const baseConfig = configBase(true); // build
 
 baseConfig.plugins = baseConfig.plugins.concat([
   new CleanWebpackPlugin(['./dist'], { verbose: true }),
-  new webpack.DefinePlugin({
-    'process.env': {
-      NODE_ENV: JSON.stringify('production')
-    }
-  }),
   new webpack.optimize.UglifyJsPlugin({
     output: {
       comments: false // 移除所有注释
