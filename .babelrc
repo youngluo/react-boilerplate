@@ -19,6 +19,7 @@
         "libraryName": "ui",
         "style": true
       }
-    ]
+    ],
+    "syntax-dynamic-import"
   ]
 }

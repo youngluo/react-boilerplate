@@ -12,7 +12,6 @@
     "node": true,
     "browser": true
   },
-  // 脚本在执行期间访问的额外的全局变量
   "globals": {
     "document": true,
     "navigator": true,
@@ -21,11 +20,20 @@
     "__APP_NAME__": true
   },
   "extends": "airbnb",
-  "plugins": ["react", "jsx-a11y", "import"],
-  // 定义自己的规则
+  "plugins": [
+    "react",
+    "jsx-a11y",
+    "import"
+  ],
   "rules": {
-    "comma-dangle": ["error", "never"],
-    "indent": ["error", 2],
+    "comma-dangle": [
+      "error",
+      "never"
+    ],
+    "indent": [
+      "error",
+      2
+    ],
     "import/no-unresolved": "off",
     "import/extensions": "off",
     "import/no-extraneous-dependencies": "off",
@@ -33,6 +41,12 @@
     "global-require": "off",
     "import/prefer-default-export": "off",
     "import/no-webpack-loader-syntax": "off",
-    "consistent-return": "off"
+    "consistent-return": "off",
+    "react/jsx-max-props-per-line": [
+      1,
+      {
+        "maximum": 1
+      }
+    ]
   }
 }

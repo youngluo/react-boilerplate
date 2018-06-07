@@ -1,5 +1,5 @@
-import Bundle from 'components/Bundle';
-import React from 'react';
+import Loading from 'components/Loading';
+import Loadable from 'react-loadable';
 
 let routes = [];
 
@@ -11,9 +11,8 @@ let routes = [];
 export default routes
   .map(route => ({
     ...route,
-    component: props => (
-      <Bundle load={route.component}>
-        {Comp => <Comp {...props} />}
-      </Bundle>
-    )
+    component: Loadable({
+      loader: route.component,
+      loading: Loading
+    })
   }));
