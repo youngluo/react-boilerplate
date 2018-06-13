@@ -47,6 +47,54 @@
       {
         "maximum": 1
       }
+    ],
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": [
+          "a"
+        ]
+      }
+    ],
+    "react/forbid-prop-types": "off",
+    "class-methods-use-this": "off",
+    "function-paren-newline": [
+      "error",
+      "consistent"
+    ],
+    "lines-between-class-members": [
+      "error",
+      "always"
+    ],
+    "padding-line-between-statements": [
+      "error",
+      {
+        "blankLine": "always",
+        "prev": [
+          "const",
+          "let",
+          "var",
+          "block-like"
+        ],
+        "next": "*"
+      },
+      {
+        "blankLine": "never",
+        "prev": [
+          "const",
+          "let"
+        ],
+        "next": [
+          "const",
+          "let"
+        ]
+      }
+    ],
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1
+      }
     ]
   }
 }
