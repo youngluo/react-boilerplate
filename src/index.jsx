@@ -5,7 +5,7 @@ import 'config/http.config.js';
 import React from 'react';
 import 'babel-polyfill';
 import store from './redux/store';
-import './index.scss';
+import './index.less';
 
 // store.subscribe(() => { //监听state变化
 //     console.log(store.getState())

@@ -3,7 +3,7 @@ import routes from 'config/router.config';
 import React, { Component } from 'react';
 import { Layout, Icon } from 'ui';
 import Menu from '../Menu';
-import './index.scss';
+import './index.less';
 
 const { Header, Content, Sider } = Layout;
 

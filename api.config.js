@@ -1,6 +1,5 @@
 module.exports = {
-  mock: {},
   development: {},
-  staging: {},
+  test: {},
   production: {}
 };

@@ -1,4 +1,4 @@
-const configBase = require('./webpack.config.base');
+const configBase = require('./config.base');
 const webpack = require('webpack');
 const _ = require('lodash');
 
@@ -11,6 +11,12 @@ baseConfig.plugins = baseConfig.plugins.concat([
 
 module.exports = _.merge(baseConfig, {
   devtool: 'source-map',
+  devServer: {
+    historyApiFallback: true,
+    host: '0.0.0.0',
+    port: 3000,
+    hot: true
+  },
   output: {
     publicPath: '/'
   }
