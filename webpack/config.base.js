@@ -1,9 +1,10 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const packageInfo = require('../package.json');
-const api = require('../api.config');
+const host = require('../api.config');
 const webpack = require('webpack');
 const path = require('path');
+const _ = require('lodash');
 
 const { name: appName } = packageInfo;
 const ROOT_PATH = path.resolve(__dirname, '../'); // 项目根目录
@@ -12,6 +13,7 @@ const ENTRY_FILE = path.resolve(APP_PATH, 'index'); // 入口文件地址
 const BUILD_PATH = path.resolve(ROOT_PATH, 'dist'); // 发布文件存放目录
 const NODE_MODULES_PATH = path.resolve(ROOT_PATH, 'node_modules'); // node_modules目录
 const TEMPLATE_FILE = path.resolve(APP_PATH, 'index.ejs'); // html模板文件地址
+const curHost = _.mapValues(host[process.env.API_ENV], value => JSON.stringify(value));
 
 module.exports = isBuild => ({
   entry: {
@@ -95,8 +97,8 @@ module.exports = isBuild => ({
       hash: false
     }),
     new webpack.DefinePlugin({
-      ...api[process.env.API_ENV],
-      __APP_NAME__: JSON.stringify(appName)
+      __APP_NAME__: JSON.stringify(appName),
+      __HOST__: curHost
     }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
   ],
