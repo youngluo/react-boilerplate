@@ -1,8 +1,7 @@
 export default [
   {
-    name: 'dashboard',
-    path: '/',
-    exact: true,
+    name: 'tag',
+    path: '/tag',
     component: () => import('./index')
   }
 ];

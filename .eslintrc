@@ -18,7 +18,8 @@
     "window": true,
     "node": true,
     "__APP_NAME__": true,
-    "__HOST__": true
+    "__HOST__": true,
+    "$$": true
   },
   "extends": "airbnb",
   "plugins": [

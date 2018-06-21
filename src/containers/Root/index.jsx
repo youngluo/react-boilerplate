@@ -1,18 +1,21 @@
-import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+// import Breadcrumb from 'components/Breadcrumb';
 import routes from 'config/router.config';
 import React, { Component } from 'react';
-import { Layout, Icon } from 'ui';
-import Menu from '../Menu';
+import Header from 'containers/Header';
+import Menu from 'components/Menu';
+import NoMatch from 'pages/404';
+import { Layout } from 'UI';
 import './index.less';
 
-const { Header, Content, Sider } = Layout;
+const { Content, Sider } = Layout;
 
 export default class Root extends Component {
   state = {
     collapsed: false
   };
 
-  toggle() {
+  toggle = () => {
     this.setState({
       collapsed: !this.state.collapsed
     });
@@ -25,21 +28,18 @@ export default class Root extends Component {
       <Router>
         <Layout>
           <Sider
+            onCollapse={this.toggle}
             collapsed={collapsed}
-            trigger={null}
             collapsible
+            width={230}
           >
             <div className="logo">{__APP_NAME__}</div>
             <Menu />
           </Sider>
           <Layout className="root-container">
-            <Header>
-              <Icon
-                type={collapsed ? 'menu-unfold' : 'menu-fold'}
-                onClick={() => this.toggle()}
-              />
-            </Header>
-            <Content style={{ padding: 30, backgroundColor: '#f0f0f0' }}>
+            <Header />
+            <Content style={{ padding: 30, backgroundColor: '#f0f0f0', overflow: 'auto' }}>
+              {/* <Breadcrumb /> */}
               <Switch>
                 {routes.map(route => (
                   <Route
@@ -49,7 +49,7 @@ export default class Root extends Component {
                     key={route.name}
                   />
                 ))}
-                <Redirect to="/dashboard" />
+                <Route component={NoMatch} />
               </Switch>
             </Content>
           </Layout>

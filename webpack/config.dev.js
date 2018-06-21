@@ -14,7 +14,7 @@ module.exports = _.merge(baseConfig, {
   devServer: {
     historyApiFallback: true,
     host: '0.0.0.0',
-    port: 8080,
+    port: 3000,
     hot: true
   },
   output: {

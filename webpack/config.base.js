@@ -128,7 +128,8 @@ module.exports = isBuild => ({
       components: path.resolve(APP_PATH, 'components'),
       config: path.resolve(APP_PATH, 'config'),
       pages: path.resolve(APP_PATH, 'pages'),
-      ui: 'antd'
+      utils: path.resolve(APP_PATH, 'utils'),
+      UI: 'antd'
     }
   }
 });

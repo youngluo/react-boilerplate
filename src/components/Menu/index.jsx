@@ -1,24 +1,23 @@
-import { NavLink } from 'react-router-dom';
-import { Menu, Icon } from 'ui';
+import { NavLink, withRouter } from 'react-router-dom';
+import navData from 'config/router-nav';
+import PropTypes from 'prop-types';
+import { Menu, Icon } from 'UI';
 import React from 'react';
-import navData from './router-nav';
 
 const { Item } = Menu;
 
-// 无状态函数组件，理想状态下，大多数组件都应该是无状态函数
-function MenuNav() {
+function MenuNav({ location }) {
+  const { pathname } = location;
+
   return (
     <Menu
-      defaultSelectedKeys={['dashboard']}
+      selectedKeys={[pathname]}
       mode="inline"
       theme="dark"
     >
       {navData.map(item => (
-        <Item key={item.name}>
-          <NavLink
-            activeClassName="ant-menu-item-selected"
-            to={item.name}
-          >
+        <Item key={item.path}>
+          <NavLink to={item.path}>
             <Icon type={item.icon} />
             <span>{item.title}</span>
           </NavLink>
@@ -28,4 +27,8 @@ function MenuNav() {
   );
 }
 
-export default MenuNav;
+MenuNav.propTypes = {
+  location: PropTypes.object.isRequired
+};
+
+export default withRouter(MenuNav);

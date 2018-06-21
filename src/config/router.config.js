@@ -1,14 +1,13 @@
 import Loading from 'components/Loading';
 import Loadable from 'react-loadable';
 
-let routes = [];
+const routes = [
+  'dashboard',
+  'blog',
+  'tag'
+].map(path => require(`pages/${path}/router.js`).default);
 
-['dashboard']
-  .forEach((path) => {
-    routes = routes.concat(require(`pages/${path}/router.js`).default);
-  });
-
-export default routes
+export default $$.flatten(routes)
   .map(route => ({
     ...route,
     component: Loadable({

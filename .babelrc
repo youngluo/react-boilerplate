@@ -16,7 +16,7 @@
     [
       "import",
       {
-        "libraryName": "ui",
+        "libraryName": "UI",
         "style": true
       }
     ],
