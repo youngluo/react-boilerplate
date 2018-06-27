@@ -21,6 +21,7 @@ module.exports = isBuild => ({
     vendor: [
       'react-router-dom',
       'babel-polyfill',
+      'react-loadable',
       'react-redux',
       'redux-thunk',
       'prop-types',
@@ -105,18 +106,20 @@ module.exports = isBuild => ({
   optimization: {
     splitChunks: {
       cacheGroups: {
-        commons: {
-          chunks: 'initial',
+        common: {
+          chunks: 'all',
           minChunks: 2,
           maxInitialRequests: 5,
-          minSize: 0
+          minSize: 0,
+          name: 'common'
         },
         vendor: {
           test: /node_modules/,
-          chunks: 'initial',
+          chunks: 'all',
           name: 'vendor',
           priority: 10,
-          enforce: true
+          enforce: true,
+          minChunks: 2
         }
       }
     }
