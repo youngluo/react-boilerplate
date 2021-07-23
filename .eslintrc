@@ -1,5 +1,5 @@
 {
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 7,
     "sourceType": "module",
@@ -16,26 +16,13 @@
     "document": true,
     "navigator": true,
     "window": true,
-    "node": true,
-    "__APP_NAME__": true,
-    "__HOST__": true,
-    "$$": true
+    "node": true
   },
   "extends": "airbnb",
-  "plugins": [
-    "react",
-    "jsx-a11y",
-    "import"
-  ],
+  "plugins": ["react", "jsx-a11y", "import"],
   "rules": {
-    "comma-dangle": [
-      "error",
-      "never"
-    ],
-    "indent": [
-      "error",
-      2
-    ],
+    "comma-dangle": ["error", "never"],
+    "indent": ["error", 2],
     "import/no-unresolved": "off",
     "import/extensions": "off",
     "import/no-extraneous-dependencies": "off",
@@ -53,43 +40,24 @@
     "jsx-a11y/anchor-is-valid": [
       "error",
       {
-        "components": [
-          "a"
-        ]
+        "components": ["a"]
       }
     ],
     "react/forbid-prop-types": "off",
     "class-methods-use-this": "off",
-    "function-paren-newline": [
-      "error",
-      "consistent"
-    ],
-    "lines-between-class-members": [
-      "error",
-      "always"
-    ],
+    "function-paren-newline": ["error", "consistent"],
+    "lines-between-class-members": ["error", "always"],
     "padding-line-between-statements": [
       "error",
       {
         "blankLine": "always",
-        "prev": [
-          "const",
-          "let",
-          "var",
-          "block-like"
-        ],
+        "prev": ["const", "let", "var", "block-like"],
         "next": "*"
       },
       {
         "blankLine": "never",
-        "prev": [
-          "const",
-          "let"
-        ],
-        "next": [
-          "const",
-          "let"
-        ]
+        "prev": ["const", "let"],
+        "next": ["const", "let"]
       }
     ],
     "no-multiple-empty-lines": [
@@ -98,9 +66,8 @@
         "max": 1
       }
     ],
-    "eol-last": [
-      "error",
-      "never"
-    ]
-  }
+    "eol-last": ["error", "never"]
+  },
+  "react/jsx-uses-react": "off",
+  "react/react-in-jsx-scope": "off"
 }

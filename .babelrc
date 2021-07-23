@@ -1,26 +1,10 @@
 {
   "presets": [
     [
-      "env",
+      "@babel/preset-react",
       {
-        "targets": {
-          "browsers": ["last 2 versions", "ie >= 10"]
-        },
-        "useBuiltIns": true
+        "runtime": "automatic"
       }
-    ],
-    "react",
-    "stage-0"
-  ],
-  "plugins": [
-    "transform-decorators-legacy",
-    [
-      "import",
-      {
-        "libraryName": "UI",
-        "style": true
-      }
-    ],
-    "syntax-dynamic-import"
+    ]
   ]
 }

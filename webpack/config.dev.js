@@ -1,23 +1,21 @@
 const configBase = require('./config.base');
+const { merge } = require('webpack-merge');
 const webpack = require('webpack');
-const _ = require('lodash');
-
 const baseConfig = configBase(false); // dev
 
-baseConfig.plugins = baseConfig.plugins.concat([
-  new webpack.HotModuleReplacementPlugin(),
-  new webpack.NamedModulesPlugin()
-]);
-
-module.exports = _.merge(baseConfig, {
-  devtool: 'source-map',
+module.exports = merge(baseConfig, {
+  mode: 'development',
+  devtool: 'inline-source-map',
   devServer: {
     historyApiFallback: true,
-    host: '0.0.0.0',
+    host: 'localhost',
     port: 8080,
     hot: true
   },
   output: {
     publicPath: '/'
-  }
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ]
 });

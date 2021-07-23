@@ -1,6 +1,6 @@
+import { Spin } from 'antd';
 import React from 'react';
-import { Spin } from 'UI';
-import './index.less';
+import './index.scss';
 
 export default function Loading() {
   return (

@@ -1,12 +1,11 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-// import Breadcrumb from 'components/Breadcrumb';
-import routes from 'config/router.config';
+import routes from '@config/router.config';
 import React, { Component } from 'react';
-import Header from 'containers/Header';
-import Menu from 'components/Menu';
-import NoMatch from 'pages/404';
-import { Layout } from 'UI';
-import './index.less';
+import Header from '@containers/Header';
+import Menu from '@components/Menu';
+import NoMatch from '@pages/404';
+import { Layout } from 'antd';
+import './index.scss';
 
 const { Content, Sider } = Layout;
 
@@ -33,13 +32,12 @@ export default class Root extends Component {
             collapsible
             width={230}
           >
-            <div className="logo">{__APP_NAME__}</div>
+            <div className="logo">123</div>
             <Menu />
           </Sider>
           <Layout className="root-container">
             <Header />
             <Content style={{ padding: 30, backgroundColor: '#f0f0f0', overflow: 'auto' }}>
-              {/* <Breadcrumb /> */}
               <Switch>
                 {routes.map(route => (
                   <Route

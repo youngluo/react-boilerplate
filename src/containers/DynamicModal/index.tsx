@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import { Modal, Form } from 'UI';
+import { Modal, Form } from 'antd';
 
 const formLayout = {
   labelCol: {
@@ -66,7 +66,7 @@ export default function DynamicModal(modalConfig) {
       }
 
       onOk() {
-        const { current } = this.ref;
+        const { current } = this.ref as any;
 
         if (current) {
           current.props.onSubmit();

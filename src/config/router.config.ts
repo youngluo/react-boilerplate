@@ -1,13 +1,12 @@
-import Loading from 'components/Loading';
+import Loading from '@components/Loading';
 import Loadable from 'react-loadable';
+import _ from 'lodash';
 
 const routes = [
   'dashboard',
-  'blog',
-  'tag'
-].map(path => require(`pages/${path}/router.js`).default);
+].map(path => require(`@pages/${path}/router.ts`));
 
-export default $$.flatten(routes)
+export default _.flatten(routes)
   .map(route => ({
     ...route,
     component: Loadable({

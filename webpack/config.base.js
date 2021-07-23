@@ -1,7 +1,6 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const packageInfo = require('../package.json');
-const host = require('../api.config');
 const webpack = require('webpack');
 const path = require('path');
 const _ = require('lodash');
@@ -13,37 +12,24 @@ const ENTRY_FILE = path.resolve(APP_PATH, 'index'); // 入口文件地址
 const BUILD_PATH = path.resolve(ROOT_PATH, 'dist'); // 发布文件存放目录
 const NODE_MODULES_PATH = path.resolve(ROOT_PATH, 'node_modules'); // node_modules目录
 const TEMPLATE_FILE = path.resolve(APP_PATH, 'index.ejs'); // html模板文件地址
-const curHost = _.mapValues(host[process.env.API_ENV], value => JSON.stringify(value));
 
 module.exports = isBuild => ({
+  mode: 'production',
   entry: {
-    app: ENTRY_FILE,
-    vendor: [
-      'react-router-dom',
-      'babel-polyfill',
-      'react-loadable',
-      'react-redux',
-      'redux-thunk',
-      'prop-types',
-      'react-dom',
-      'axios',
-      'redux',
-      'react',
-      'antd'
-    ]
+    app: ENTRY_FILE
   },
   output: {
     path: BUILD_PATH,
-    filename: `js/[name].[${isBuild ? 'chunkhash' : 'hash'}:8].js`,
-    chunkFilename: 'js/[name].[chunkhash:8].js'
+    filename: `js/[name].[contenthash].js`,
+    chunkFilename: 'js/[name].[contenthash].js'
   },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.tsx?$/,
         include: APP_PATH,
         exclude: NODE_MODULES_PATH,
-        use: 'babel-loader'
+        use: 'ts-loader'
       },
       {
         test: /\.css$/,
@@ -54,39 +40,18 @@ module.exports = isBuild => ({
           : ['style-loader', 'css-loader', 'postcss-loader']
       },
       {
-        test: /\.less$/,
+        test: /\.scss$/,
+        include: APP_PATH,
+        exclude: NODE_MODULES_PATH,
         use: isBuild
-          ? [MiniCssExtractPlugin.loader, 'css-loader?minimize=true', 'postcss-loader', 'less-loader']
-          : ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
+          ? [MiniCssExtractPlugin.loader, 'css-loader?minimize=true', 'postcss-loader', 'sass-loader']
+          : ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
       },
       {
-        test: /\.(eot|woff|ttf|woff2)(\?|$)/,
+        test: /\.(png|jpg|gif|svg|webp|eot|woff|ttf|woff2)$/,
         include: APP_PATH,
         exclude: NODE_MODULES_PATH,
-        use: {
-          loader: 'file-loader',
-          options: {
-            name: 'fonts/[name].[hash:8].[ext]'
-          }
-        }
-      },
-      {
-        test: /\.(png|jpg|gif|svg)$/,
-        include: APP_PATH,
-        exclude: NODE_MODULES_PATH,
-        use: {
-          loader: 'url-loader',
-          options: {
-            limit: 8192,
-            name: 'images/[name].[hash:8].[ext]'
-          }
-        }
-      },
-      {
-        test: /\.jsx$/,
-        include: APP_PATH,
-        exclude: NODE_MODULES_PATH,
-        use: ['jsx-loader', 'babel-loader']
+        type: 'asset'
       }
     ]
   },
@@ -99,40 +64,22 @@ module.exports = isBuild => ({
     }),
     new webpack.DefinePlugin({
       __APP_NAME__: JSON.stringify(appName),
-      __HOST__: curHost
     }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
   ],
   optimization: {
     splitChunks: {
-      cacheGroups: {
-        common: {
-          chunks: 'all',
-          minChunks: 2,
-          maxInitialRequests: 5,
-          minSize: 0,
-          name: 'common'
-        },
-        vendor: {
-          test: /node_modules/,
-          chunks: 'all',
-          name: 'vendor',
-          priority: 10,
-          enforce: true,
-          minChunks: 2
-        }
-      }
+      chunks: 'all'
     }
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.less', '.scss', '.css'],
+    extensions: ['.ts', '.tsx', '.js'],
     alias: {
-      containers: path.resolve(APP_PATH, 'containers'),
-      components: path.resolve(APP_PATH, 'components'),
-      config: path.resolve(APP_PATH, 'config'),
-      pages: path.resolve(APP_PATH, 'pages'),
-      utils: path.resolve(APP_PATH, 'utils'),
-      UI: 'antd'
+      '@containers': path.resolve(APP_PATH, 'containers'),
+      '@components': path.resolve(APP_PATH, 'components'),
+      '@config': path.resolve(APP_PATH, 'config'),
+      '@pages': path.resolve(APP_PATH, 'pages'),
+      '@util': path.resolve(APP_PATH, 'utils'),
     }
   }
 });

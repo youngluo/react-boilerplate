@@ -1,6 +1,6 @@
-import { Layout, Dropdown, Menu, Icon } from 'UI';
+import { Layout, Dropdown, Menu } from 'antd';
 import React from 'react';
-import './index.less';
+import './index.scss';
 
 const { Header } = Layout;
 const { Item } = Menu;
@@ -19,10 +19,10 @@ const menu = (
     {menuItems.map(item => (
       <Item key={item.icon}>
         <span>
-          <Icon
+          {/* <Icon
             style={{ marginRight: 8 }}
             type={item.icon}
-          />
+          /> */}
           <span>{item.text}</span>
         </span>
       </Item>
@@ -37,10 +37,10 @@ export default function NewHeader() {
         <Dropdown overlay={menu}>
           <div className="ant-dropdown-link">
             <span>Hover me</span>
-            <Icon
+            {/* <Icon
               style={{ marginLeft: 8 }}
               type="down"
-            />
+            /> */}
           </div>
         </Dropdown>
       </div>
