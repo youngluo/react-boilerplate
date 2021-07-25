@@ -66,8 +66,9 @@
         "max": 1
       }
     ],
-    "eol-last": ["error", "never"]
-  },
-  "react/jsx-uses-react": "off",
-  "react/react-in-jsx-scope": "off"
+    "eol-last": ["error", "never"],
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-filename-extension": ["error", {"extensions": [".tsx"]}]
+  }
 }

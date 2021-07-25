@@ -1,33 +1,23 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { FC, Suspense, useState } from 'react';
 import routes from '@config/router.config';
-import React, { Component } from 'react';
 import Header from '@containers/Header';
 import Menu from '@components/Menu';
 import NoMatch from '@pages/404';
 import { Layout } from 'antd';
+import Loading from '@component/Loading';
 import './index.scss';
 
 const { Content, Sider } = Layout;
+const Root: FC = () => {
+  const [collapsed, setCollapsed] = useState(false);
 
-export default class Root extends Component {
-  state = {
-    collapsed: false
-  };
-
-  toggle = () => {
-    this.setState({
-      collapsed: !this.state.collapsed
-    });
-  }
-
-  render() {
-    const { collapsed } = this.state;
-
-    return (
+  return (
+    <Suspense fallback={<Loading />}>
       <Router>
         <Layout>
           <Sider
-            onCollapse={this.toggle}
+            onCollapse={() => setCollapsed(!collapsed)}
             collapsed={collapsed}
             collapsible
             width={230}
@@ -39,7 +29,7 @@ export default class Root extends Component {
             <Header />
             <Content style={{ padding: 30, backgroundColor: '#f0f0f0', overflow: 'auto' }}>
               <Switch>
-                {routes.map(route => (
+                {routes.map((route) => (
                   <Route
                     component={route.component}
                     exact={route.exact}
@@ -53,6 +43,8 @@ export default class Root extends Component {
           </Layout>
         </Layout>
       </Router>
-    );
-  }
-}
+    </Suspense>
+  );
+};
+
+export default Root;

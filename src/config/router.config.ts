@@ -1,16 +1,13 @@
-import Loading from '@components/Loading';
-import Loadable from 'react-loadable';
+import { lazy } from 'react';
 import _ from 'lodash';
 
-const routes = [
-  'dashboard',
-].map(path => require(`@pages/${path}/router.ts`));
+const routes = require
+  .context('@pages', true, /router\.ts$/)
+  .keys()
+  .map((path: string) => require(`@pages/${path.slice(2)}`).default);
 
 export default _.flatten(routes)
-  .map(route => ({
+  .map((route) => ({
     ...route,
-    component: Loadable({
-      loader: route.component,
-      loading: Loading
-    })
+    component: lazy(route.component)
   }));
