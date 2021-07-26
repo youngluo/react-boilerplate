@@ -1,4 +1,5 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const tsImportPluginFactory = require('ts-import-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const packageInfo = require('../package.json');
 const webpack = require('webpack');
@@ -29,12 +30,26 @@ module.exports = isBuild => ({
         test: /\.tsx?$/,
         include: APP_PATH,
         exclude: NODE_MODULES_PATH,
-        use: 'ts-loader'
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true,
+              getCustomTransformers: () => ({
+                before: [tsImportPluginFactory({
+                  libraryName: 'antd',
+                  libraryDirectory: 'lib',
+                  style: 'css'
+                })]
+              }),
+            }
+          }
+        ],
       },
       {
         test: /\.css$/,
-        include: APP_PATH,
-        exclude: NODE_MODULES_PATH,
+        // include: APP_PATH,
+        // exclude: NODE_MODULES_PATH,
         use: isBuild
           ? [MiniCssExtractPlugin.loader, 'css-loader?minimize=true', 'postcss-loader']
           : ['style-loader', 'css-loader', 'postcss-loader']
@@ -75,11 +90,11 @@ module.exports = isBuild => ({
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
     alias: {
-      '@containers': path.resolve(APP_PATH, 'containers'),
-      '@components': path.resolve(APP_PATH, 'components'),
-      '@config': path.resolve(APP_PATH, 'config'),
-      '@pages': path.resolve(APP_PATH, 'pages'),
-      '@util': path.resolve(APP_PATH, 'utils'),
+      '@/containers': path.resolve(APP_PATH, 'containers'),
+      '@/components': path.resolve(APP_PATH, 'components'),
+      '@/config': path.resolve(APP_PATH, 'config'),
+      '@/pages': path.resolve(APP_PATH, 'pages'),
+      '@/util': path.resolve(APP_PATH, 'utils'),
     }
   }
 });

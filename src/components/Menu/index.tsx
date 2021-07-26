@@ -1,9 +1,8 @@
 import { NavLink, useLocation } from 'react-router-dom';
-import navData from '@config/router-nav';
+import navData from '@/config/router-nav';
 import { Menu } from 'antd';
-import React from 'react';
-const { Item } = Menu;
 
+const { Item } = Menu;
 const MenuNav = () => {
   const { pathname } = useLocation();
 
@@ -13,7 +12,7 @@ const MenuNav = () => {
       mode="inline"
       theme="dark"
     >
-      {navData.map(item => (
+      {navData.map((item) => (
         <Item key={item.path}>
           <NavLink to={item.path}>
             {/* <Icon type={item.icon} /> */}
@@ -23,6 +22,6 @@ const MenuNav = () => {
       ))}
     </Menu>
   );
-}
+};
 
 export default MenuNav;

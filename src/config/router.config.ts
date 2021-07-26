@@ -2,9 +2,9 @@ import { lazy } from 'react';
 import _ from 'lodash';
 
 const routes = require
-  .context('@pages', true, /router\.ts$/)
+  .context('@/pages', true, /router\.ts$/)
   .keys()
-  .map((path: string) => require(`@pages/${path.slice(2)}`).default);
+  .map((path: string) => require(`@/pages/${path.slice(2)}`).default);
 
 export default _.flatten(routes)
   .map((route) => ({

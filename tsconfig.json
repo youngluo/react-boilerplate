@@ -16,11 +16,12 @@
     "jsx": "react-jsx"
   },
   "paths": {
-    "@components/*": ["src/components/*"],
-    "@containers/*": ["src/containers/*"],
-    "@config/*": ["src/config/*"],
-    "@pages/*": ["src/pages/*"],
-    "@util/*": ["src/utils/*"]
+    "@/*": ["src/*"],
+    "@/components/*": ["src/components/*"],
+    "@/containers/*": ["src/containers/*"],
+    "@/config/*": ["src/config/*"],
+    "@/pages/*": ["src/pages/*"],
+    "@/util/*": ["src/utils/*"]
   },
   "include": ["src"]
 }

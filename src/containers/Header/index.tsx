@@ -1,5 +1,4 @@
 import { Layout, Dropdown, Menu } from 'antd';
-import React from 'react';
 import './index.scss';
 
 const { Header } = Layout;
@@ -16,7 +15,7 @@ const menuItems = [
 ];
 const menu = (
   <Menu style={{ width: 160 }}>
-    {menuItems.map(item => (
+    {menuItems.map((item) => (
       <Item key={item.icon}>
         <span>
           {/* <Icon
@@ -32,7 +31,7 @@ const menu = (
 
 export default function NewHeader() {
   return (
-    <Header style={{ background: '#fff' }} >
+    <Header style={{ background: '#fff' }}>
       <div style={{ float: 'right', height: '100%' }}>
         <Dropdown overlay={menu}>
           <div className="ant-dropdown-link">

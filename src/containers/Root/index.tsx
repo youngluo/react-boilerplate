@@ -1,11 +1,10 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { FC, Suspense, useState } from 'react';
-import routes from '@config/router.config';
-import Header from '@containers/Header';
-import Menu from '@components/Menu';
-import NoMatch from '@pages/404';
-import { Layout } from 'antd';
-import Loading from '@component/Loading';
+import routes from '@/config/router.config';
+import Header from '@/containers/Header';
+import Menu from '@/components/Menu';
+import NoMatch from '@/pages/404';
+import { Layout, Spin } from 'antd';
 import './index.scss';
 
 const { Content, Sider } = Layout;
@@ -13,7 +12,7 @@ const Root: FC = () => {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <Suspense fallback={<Loading />}>
+    <Suspense fallback={<Spin />}>
       <Router>
         <Layout>
           <Sider

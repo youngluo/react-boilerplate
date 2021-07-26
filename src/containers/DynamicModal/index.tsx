@@ -19,13 +19,11 @@ export default function DynamicModal(modalConfig) {
 
   document.body.appendChild(div);
 
-  modalConfig = Object.assign(
-    {
-      cancelText: '取消',
-      okText: '保存'
-    },
-    modalConfig
-  );
+  modalConfig = {
+    cancelText: '取消',
+    okText: '保存',
+    ...modalConfig
+  };
 
   return (Component) => {
     Component = Form.create()(Component);
