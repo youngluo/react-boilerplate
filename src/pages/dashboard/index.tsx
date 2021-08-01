@@ -1,5 +1,9 @@
-function Dashboard() {
-  return <div>dashboard</div>;
-}
+import { FC } from 'react'
 
-export default Dashboard;
+const Dashboard: FC = () => (
+  <div>
+    dashboard
+  </div>
+)
+
+export default Dashboard

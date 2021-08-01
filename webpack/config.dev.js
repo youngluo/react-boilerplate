@@ -1,7 +1,6 @@
-const configBase = require('./config.base');
-const { merge } = require('webpack-merge');
-const webpack = require('webpack');
-const baseConfig = configBase(false); // dev
+const { merge } = require('webpack-merge')
+const webpack = require('webpack')
+const baseConfig = require('./config.base')
 
 module.exports = merge(baseConfig, {
   mode: 'development',
@@ -9,6 +8,10 @@ module.exports = merge(baseConfig, {
   devServer: {
     historyApiFallback: true,
     host: 'localhost',
+    compress: true,
+    overlay: {
+      errors: true
+    },
     port: 8080,
     hot: true
   },
@@ -18,4 +21,4 @@ module.exports = merge(baseConfig, {
   plugins: [
     new webpack.HotModuleReplacementPlugin()
   ]
-});
+})

@@ -1,10 +1,10 @@
-import { NavLink, useLocation } from 'react-router-dom';
-import navData from '@/config/router-nav';
-import { Menu } from 'antd';
+import { NavLink, useLocation } from 'react-router-dom'
+import navData from '@/config/router-nav'
+import { Menu } from 'antd'
 
-const { Item } = Menu;
+const { Item } = Menu
 const MenuNav = () => {
-  const { pathname } = useLocation();
+  const { pathname } = useLocation()
 
   return (
     <Menu
@@ -21,7 +21,7 @@ const MenuNav = () => {
         </Item>
       ))}
     </Menu>
-  );
-};
+  )
+}
 
-export default MenuNav;
+export default MenuNav

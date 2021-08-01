@@ -1,5 +1,5 @@
-function NoMatch() {
-  return '404';
-}
+import { FC } from 'react'
 
-export default NoMatch;
+const NoMatch: FC = () => <div>404</div>
+
+export default NoMatch

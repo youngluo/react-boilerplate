@@ -1,8 +1,8 @@
-import { Layout, Dropdown, Menu } from 'antd';
-import './index.scss';
+import { Layout, Dropdown, Menu } from 'antd'
+import styles from './index.scss'
 
-const { Header } = Layout;
-const { Item } = Menu;
+const { Header } = Layout
+const { Item } = Menu
 const menuItems = [
   {
     icon: 'user',
@@ -12,7 +12,7 @@ const menuItems = [
     icon: 'logout',
     text: '退出登录'
   }
-];
+]
 const menu = (
   <Menu style={{ width: 160 }}>
     {menuItems.map((item) => (
@@ -27,14 +27,14 @@ const menu = (
       </Item>
     ))}
   </Menu>
-);
+)
 
 export default function NewHeader() {
   return (
     <Header style={{ background: '#fff' }}>
       <div style={{ float: 'right', height: '100%' }}>
         <Dropdown overlay={menu}>
-          <div className="ant-dropdown-link">
+          <div className={styles.link}>
             <span>Hover me</span>
             {/* <Icon
               style={{ marginLeft: 8 }}
@@ -44,5 +44,5 @@ export default function NewHeader() {
         </Dropdown>
       </div>
     </Header>
-  );
+  )
 }

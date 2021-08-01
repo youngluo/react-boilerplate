@@ -14,4 +14,4 @@ export default [
     icon: 'tags-o',
     title: '标签管理'
   }
-];
+]
