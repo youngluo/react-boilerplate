@@ -1,19 +1,22 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { FC, Suspense, useState } from 'react'
-import routes from '@/config/router.config'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import {
+  FC, Suspense, useState, lazy
+} from 'react'
 import Header from '@/containers/Header'
-import Menu from '@/components/Menu'
-import NoMatch from '@/pages/404'
+import routes from '@/config/routes'
+import Menu from '@/containers/Menu'
 import { Layout, Spin } from 'antd'
+import NoMatch from '@/pages/404'
 import styles from './index.scss'
 
 const { Content, Sider } = Layout
+
 const Root: FC = () => {
   const [collapsed, setCollapsed] = useState(false)
 
   return (
     <Suspense fallback={<Spin />}>
-      <Router>
+      <BrowserRouter>
         <Layout>
           <Sider
             onCollapse={() => setCollapsed(!collapsed)}
@@ -30,10 +33,10 @@ const Root: FC = () => {
               <Switch>
                 {routes.map((route) => (
                   <Route
-                    component={route.component}
+                    component={lazy(route.component)}
                     exact={route.exact}
                     path={route.path}
-                    key={route.name}
+                    key={route.path}
                   />
                 ))}
                 <Route component={NoMatch} />
@@ -41,7 +44,7 @@ const Root: FC = () => {
             </Content>
           </Layout>
         </Layout>
-      </Router>
+      </BrowserRouter>
     </Suspense>
   )
 }

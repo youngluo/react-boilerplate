@@ -1,4 +1,3 @@
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const { merge } = require('webpack-merge')
@@ -8,8 +7,7 @@ module.exports = merge(baseConfig, {
   mode: 'production',
   devtool: 'source-map',
   plugins: [
-    new CleanWebpackPlugin(),
-    new BundleAnalyzerPlugin()
+    new CleanWebpackPlugin()
   ],
   optimization: {
     minimizer: [

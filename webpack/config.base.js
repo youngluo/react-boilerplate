@@ -1,5 +1,5 @@
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const tsImportPluginFactory = require('ts-import-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const WebpackBar = require('webpackbar')
 const webpack = require('webpack')
@@ -15,7 +15,6 @@ const NODE_MODULES_PATH = path.resolve(ROOT_PATH, 'node_modules') // node_module
 const TEMPLATE_FILE = path.resolve(APP_PATH, 'index.ejs') // html模板文件地址
 
 module.exports = {
-  mode: 'production',
   entry: {
     app: ENTRY_FILE
   },
@@ -32,16 +31,9 @@ module.exports = {
         exclude: NODE_MODULES_PATH,
         use: [
           {
-            loader: 'ts-loader',
+            loader: 'babel-loader', // 使用 babel 编译 ts，也可用 ts-loader
             options: {
-              getCustomTransformers: () => ({
-                transpileOnly: true,
-                before: [tsImportPluginFactory({
-                  libraryName: 'antd',
-                  libraryDirectory: 'lib',
-                  style: 'css'
-                })]
-              })
+              cacheDirectory: true
             }
           }
         ]
@@ -66,7 +58,7 @@ module.exports = {
               importLoaders: 2,
               modules: {
                 auto: /.*(?<!\.global\.s?css)$/i,
-                localIdentName: '[path][name]__[local]'// '[hash:base64]'
+                localIdentName: process.env.NODE_ENV === 'production' ? '[hash:base64]' : '[path][name]__[local]'
               }
             }
           },
@@ -93,6 +85,7 @@ module.exports = {
       __APP_NAME__: JSON.stringify(appName)
     }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new ForkTsCheckerWebpackPlugin(), // 使用 babel 编译 ts 时，增加类型检测
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash].css'
     }),
@@ -100,7 +93,21 @@ module.exports = {
   ],
   optimization: {
     splitChunks: {
-      chunks: 'all'
+      chunks: 'all',
+      cacheGroups: {
+        common: {
+          name: 'common',
+          minChunks: 2,
+          priority: 0,
+          minSize: 0
+        },
+        vendor: {
+          test: /node_modules/,
+          name: 'vendor',
+          minChunks: 2,
+          priority: 1
+        }
+      }
     }
   },
   resolve: {

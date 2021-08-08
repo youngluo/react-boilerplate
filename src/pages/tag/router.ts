@@ -1,7 +1,8 @@
 export default [
   {
     component: () => import('./index'),
-    name: 'tag',
-    path: '/tag'
+    path: '/tag',
+    icon: 'tags-o',
+    title: '标签管理'
   }
 ]

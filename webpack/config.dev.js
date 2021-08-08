@@ -13,6 +13,7 @@ module.exports = merge(baseConfig, {
       errors: true
     },
     port: 8080,
+    open: true,
     hot: true
   },
   output: {

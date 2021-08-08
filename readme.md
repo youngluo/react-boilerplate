@@ -1,11 +1,19 @@
-## 技术栈
+# React Boilerplate
 
-- react
-- redux 
-- react-router4
-- ES6 
-- axios 
-- less 
-- antd 
-- webpack4
+## dev
 
+```
+yarn start
+```
+
+## build
+
+```
+yarn build
+```
+
+## analyze
+
+```
+yarn analyze
+```
