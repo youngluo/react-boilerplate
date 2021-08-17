@@ -1,6 +1,6 @@
 import { NavLink, useLocation } from 'react-router-dom'
-import routes from '@/config/routes'
 import { Menu } from 'antd'
+import routes from '@/config/routes'
 
 const { Item } = Menu
 
@@ -16,7 +16,7 @@ const MenuNav = () => {
       {routes.map((item) => (
         <Item key={item.path}>
           <NavLink to={item.path}>
-            {/* <Icon type={item.icon} /> */}
+            {item.icon}
             <span>{item.title}</span>
           </NavLink>
         </Item>

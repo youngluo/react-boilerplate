@@ -1,9 +1,15 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 
-const Dashboard: FC = () => (
-  <div>
-    dashboard
-  </div>
-)
+const Dashboard: FC = () => {
+  useEffect(() => {
+
+  }, [])
+
+  return (
+    <div>
+      dashboard
+    </div>
+  )
+}
 
 export default Dashboard

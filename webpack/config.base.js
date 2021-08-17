@@ -7,21 +7,20 @@ const path = require('path')
 const packageInfo = require('../package.json')
 
 const { name: appName } = packageInfo
-const ROOT_PATH = path.resolve(__dirname, '../') // 项目根目录
-const APP_PATH = path.resolve(ROOT_PATH, 'src') // 项目源代码目录
-const ENTRY_FILE = path.resolve(APP_PATH, 'index') // 入口文件地址
-const BUILD_PATH = path.resolve(ROOT_PATH, 'dist') // 发布文件存放目录
-const NODE_MODULES_PATH = path.resolve(ROOT_PATH, 'node_modules') // node_modules目录
-const TEMPLATE_FILE = path.resolve(APP_PATH, 'index.ejs') // html模板文件地址
+const ROOT_PATH = path.resolve(__dirname, '../')
+const APP_PATH = path.resolve(ROOT_PATH, 'src')
+const ENTRY_FILE = path.resolve(APP_PATH, 'index')
+const BUILD_PATH = path.resolve(ROOT_PATH, 'dist')
+const NODE_MODULES_PATH = path.resolve(ROOT_PATH, 'node_modules')
+const TEMPLATE_FILE = path.resolve(APP_PATH, 'index.ejs')
+const isProduction = process.env.NODE_ENV === 'production'
 
 module.exports = {
-  entry: {
-    app: ENTRY_FILE
-  },
+  entry: ENTRY_FILE,
   output: {
     path: BUILD_PATH,
-    filename: 'js/[name].[contenthash].js',
-    chunkFilename: 'js/[name].[contenthash].js'
+    filename: 'js/[name].[contenthash:8].js',
+    chunkFilename: 'js/[name].[contenthash:8].chunk.js'
   },
   module: {
     rules: [
@@ -41,7 +40,7 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
           'css-loader',
           'postcss-loader'
         ]
@@ -51,14 +50,14 @@ module.exports = {
         include: APP_PATH,
         exclude: NODE_MODULES_PATH,
         use: [
-          MiniCssExtractPlugin.loader,
+          isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
           {
             loader: 'css-loader',
             options: {
               importLoaders: 2,
               modules: {
                 auto: /.*(?<!\.global\.s?css)$/i,
-                localIdentName: process.env.NODE_ENV === 'production' ? '[hash:base64]' : '[path][name]__[local]'
+                localIdentName: isProduction ? '[hash:base64]' : '[path][name]__[local]'
               }
             }
           },
@@ -76,9 +75,9 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: appName,
       filename: path.resolve(BUILD_PATH, 'index.html'),
       template: TEMPLATE_FILE,
+      title: appName,
       hash: false
     }),
     new webpack.DefinePlugin({
@@ -86,9 +85,6 @@ module.exports = {
     }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new ForkTsCheckerWebpackPlugin(), // 使用 babel 编译 ts 时，增加类型检测
-    new MiniCssExtractPlugin({
-      filename: 'css/[name].[contenthash].css'
-    }),
     new WebpackBar()
   ],
   optimization: {

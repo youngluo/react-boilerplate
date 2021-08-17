@@ -1,7 +1,11 @@
-function Dashboard() {
+import { FC, useState } from 'react'
+
+const Dashboard: FC = () => {
+  const [count, setCount] = useState(0)
+
   return (
-    <div>
-      tag
+    <div onClick={() => setCount((c) => c + 1)}>
+      {count}
     </div>
   )
 }
