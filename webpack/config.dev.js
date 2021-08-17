@@ -1,3 +1,4 @@
+const ErrorOverlayPlugin = require('error-overlay-webpack-plugin')
 const { merge } = require('webpack-merge')
 const webpack = require('webpack')
 const baseConfig = require('./config.base')
@@ -9,8 +10,9 @@ module.exports = merge(baseConfig, {
     historyApiFallback: true,
     host: 'localhost',
     compress: true,
-    overlay: {
-      errors: true
+    stats: {
+      preset: 'minimal',
+      timings: false
     },
     port: 8080,
     open: true,
@@ -20,6 +22,7 @@ module.exports = merge(baseConfig, {
     publicPath: '/'
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new ErrorOverlayPlugin()
   ]
 })
