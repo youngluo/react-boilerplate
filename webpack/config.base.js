@@ -80,9 +80,6 @@ module.exports = {
       title: appName,
       hash: false
     }),
-    new webpack.DefinePlugin({
-      __APP_NAME__: JSON.stringify(appName)
-    }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new ForkTsCheckerWebpackPlugin(), // 使用 babel 编译 ts 时，增加类型检测
     new WebpackBar()
@@ -107,7 +104,7 @@ module.exports = {
     }
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js'],
+    extensions: ['.tsx', '.ts', '.js'],
     alias: {
       '@/containers': path.resolve(APP_PATH, 'containers'),
       '@/components': path.resolve(APP_PATH, 'components'),

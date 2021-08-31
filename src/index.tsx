@@ -1,6 +1,6 @@
 import { Provider } from 'react-redux'
-import Root from '@/containers/Root'
 import ReactDOM from 'react-dom'
+import Root from '@/containers/Root'
 import '@/config/http.config'
 import store from './redux/store'
 import './app.global.scss'

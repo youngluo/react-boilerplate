@@ -1,13 +1,12 @@
-import { FC, useEffect } from 'react'
+import { FC, useState } from 'react'
 
 const Dashboard: FC = () => {
-  useEffect(() => {
-
-  }, [])
+  const [state, setState] = useState(0)
 
   return (
-    <div>
+    <div onClick={() => setState((v) => v + 1)}>
       dashboard
+      {state}
     </div>
   )
 }

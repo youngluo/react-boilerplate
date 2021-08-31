@@ -1,28 +1,31 @@
-const ErrorOverlayPlugin = require('error-overlay-webpack-plugin')
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 const { merge } = require('webpack-merge')
-const webpack = require('webpack')
 const baseConfig = require('./config.base')
 
 module.exports = merge(baseConfig, {
   mode: 'development',
   devtool: 'inline-source-map',
+  target: 'web',
   devServer: {
     historyApiFallback: true,
     host: 'localhost',
     compress: true,
-    stats: {
-      preset: 'minimal',
-      timings: false
+    devMiddleware: {
+      stats: {
+        preset: 'minimal',
+        timings: false
+      }
     },
+    // client: {
+    //   overlay: false
+    // },
     port: 8080,
-    open: true,
-    hot: true
+    open: true
   },
   output: {
     publicPath: '/'
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new ErrorOverlayPlugin()
+    new ReactRefreshWebpackPlugin({ overlay: false })
   ]
 })
