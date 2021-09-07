@@ -17,7 +17,7 @@
   ],
   "plugins": [
     "@babel/plugin-syntax-dynamic-import",
-    "react-refresh/babel",
+    "@babel/plugin-transform-runtime",
     [
       "import",
       {
@@ -26,5 +26,10 @@
       }
     ],
     "lodash"
-  ]
+  ],
+  "env": {
+    "development": {
+      "plugins": ["react-refresh/babel"]
+    }
+  }
 }

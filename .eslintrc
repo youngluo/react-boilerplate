@@ -19,7 +19,7 @@
     "node": true
   },
   "extends": "airbnb",
-  "plugins": ["react", "jsx-a11y", "import"],
+  "plugins": ["react", "react-hooks", "jsx-a11y", "import"],
   "rules": {
     "semi": ["error", "never"],
     "comma-dangle": ["error", "never"],

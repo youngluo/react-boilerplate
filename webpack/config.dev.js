@@ -4,8 +4,7 @@ const baseConfig = require('./config.base')
 
 module.exports = merge(baseConfig, {
   mode: 'development',
-  devtool: 'inline-source-map',
-  target: 'web',
+  devtool: 'eval',
   devServer: {
     historyApiFallback: true,
     host: 'localhost',
@@ -19,8 +18,7 @@ module.exports = merge(baseConfig, {
     // client: {
     //   overlay: false
     // },
-    port: 8080,
-    open: true
+    port: 8080
   },
   output: {
     publicPath: '/'

@@ -57,7 +57,7 @@ module.exports = {
               importLoaders: 2,
               modules: {
                 auto: /.*(?<!\.global\.s?css)$/i,
-                localIdentName: isProduction ? '[hash:base64]' : '[path][name]__[local]'
+                localIdentName: isProduction ? '[hash:base64:8]' : '[path][name]__[local]'
               }
             }
           },
@@ -85,6 +85,7 @@ module.exports = {
     new WebpackBar()
   ],
   optimization: {
+    runtimeChunk: 'single',
     splitChunks: {
       chunks: 'all',
       cacheGroups: {
