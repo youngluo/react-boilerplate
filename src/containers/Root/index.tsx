@@ -1,17 +1,16 @@
-import { BrowserRouter, Route, Switch, NavLink, useLocation } from 'react-router-dom'
 import { FC, Suspense, lazy, useState, useEffect } from 'react'
-import { Menu, Layout } from 'antd'
-import { loadModules } from '@/config/routes'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { Layout } from 'antd'
+import { loadModules, IRouter } from '@/config/routes'
 import Header from '@/containers/Header'
+import Menu from '@/containers/Menu'
 import NoMatch from '@/pages/404'
 import styles from './index.scss'
 
 const { Content, Sider } = Layout
-const { Item } = Menu
 
 const Root: FC = () => {
-  const [routes, setRoutes] = useState<any[]>([])
-  const { pathname } = useLocation()
+  const [routes, setRoutes] = useState<IRouter[]>([])
 
   useEffect(() => {
     loadModules()
@@ -28,20 +27,7 @@ const Root: FC = () => {
           collapsible
         >
           <div className={styles.logo}>123</div>
-          <Menu
-            selectedKeys={[pathname]}
-            mode="inline"
-            theme="dark"
-          >
-            {routes.map((route) => (
-              <Item key={route.path}>
-                <NavLink to={route.path}>
-                  {route.icon}
-                  <span>{route.title}</span>
-                </NavLink>
-              </Item>
-            ))}
-          </Menu>
+          <Menu routes={routes} />
         </Sider>
         <Layout>
           <Header />
