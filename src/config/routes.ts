@@ -1,8 +1,12 @@
 import _ from 'lodash'
 
-const routes = require
-  .context('@/pages', true, /router\.tsx$/)
-  .keys()
-  .map((path: string) => require(`@/pages/${path.slice(2)}`).default)
+export const loadModules = async () => {
+  const requireContext = require.context('@/pages', true, /router\.tsx?$/, 'lazy')
+  const modules = await Promise.all(
+    requireContext
+      .keys()
+      .map((path) => requireContext(path))
+  )
 
-export default _.flatten(routes)
+  return _.flatten(_.map(modules, 'default'))
+}

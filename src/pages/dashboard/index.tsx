@@ -1,8 +1,6 @@
-import {
-  FC, useState, lazy, Suspense
-} from 'react'
+import { FC, useState, lazy, Suspense } from 'react'
 
-const LazyD2 = lazy(() => import(/* webpackChunkName: "dynamic" */ './D2'))
+const LazyD2 = lazy(() => import(/* webpackChunkName: "dynamic1" */ './D2'))
 
 const Dashboard: FC = () => {
   const [state, setState] = useState(0)
