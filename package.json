@@ -11,7 +11,8 @@
     "start": "webpack server -c webpack/config.dev.js --hot --open --node-env development",
     "build": "webpack -c webpack/config.prod.js --node-env production",
     "dev": "yarn build --mode development",
-    "analyze": "yarn build --analyze"
+    "analyze": "yarn build --analyze",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "github",
