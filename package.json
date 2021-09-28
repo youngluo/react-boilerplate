@@ -1,6 +1,6 @@
 {
   "name": "react-boilerplate",
-  "version": "2.0.0",
+  "version": "1.0.0",
   "description": "",
   "main": "",
   "browserslist": [
@@ -32,7 +32,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "commit-msg": "node verifyCommit.js"
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "dependencies": {
@@ -53,6 +53,8 @@
     "@babel/preset-env": "^7.15.6",
     "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.15.0",
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.2.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.0",
     "@types/lodash": "^4.14.172",
     "@types/node": "^16.4.1",

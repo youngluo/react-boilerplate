@@ -1,6 +1,7 @@
 import { DashboardOutlined } from '@ant-design/icons'
+import { createRouter } from '@/config/routes'
 
-export default [
+export default createRouter([
   {
     component: () => import('./index'),
     icon: <DashboardOutlined />,
@@ -8,4 +9,4 @@ export default [
     exact: true,
     path: '/'
   }
-]
+])
