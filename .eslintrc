@@ -18,40 +18,21 @@
     "window": true,
     "node": true
   },
-  "extends": "airbnb",
-  "plugins": ["react", "react-hooks", "jsx-a11y", "import"],
+  "extends": ["airbnb", "plugin:react/jsx-runtime"],
+  "plugins": ["react", "jsx-a11y", "import", "react-hooks"],
   "rules": {
     "semi": ["error", "never"],
     "comma-dangle": ["error", "never"],
     "import/no-unresolved": "off",
     "import/extensions": "off",
-    "import/no-extraneous-dependencies": "off",
-    "import/no-dynamic-require": "off",
-    "global-require": "off",
-    "import/prefer-default-export": "off",
-    "import/no-webpack-loader-syntax": "off",
-    "consistent-return": "off",
-    "react/jsx-max-props-per-line": [
-      1,
-      {
-        "maximum": 1
-      }
-    ],
-    "react/forbid-prop-types": "off",
+    "react/jsx-max-props-per-line": ["error", {"maximum": 1}],
     "class-methods-use-this": "off",
     "function-paren-newline": ["error", "consistent"],
     "lines-between-class-members": ["error", "always"],
-    "no-multiple-empty-lines": [
-      "error",
-      {
-        "max": 1
-      }
-    ],
-    "react/jsx-uses-react": "off",
-    "react/react-in-jsx-scope": "off",
+    "no-multiple-empty-lines": ["error", {"max": 1}],
+    "object-curly-newline": ["error", {"consistent": true}],
     "react/jsx-filename-extension": ["error", {"extensions": [".tsx"]}],
-    "jsx-a11y/no-static-element-interactions": "off",
     "jsx-a11y/click-events-have-key-events": "off",
-    "object-curly-newline": "off"
+    "jsx-a11y/no-static-element-interactions": "off"
   }
 }

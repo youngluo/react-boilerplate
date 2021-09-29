@@ -12,6 +12,7 @@
     "build": "webpack -c webpack/config.prod.js --node-env production",
     "dev": "yarn build --mode development",
     "analyze": "yarn build --analyze",
+    "commit": "git add -A && git-cz",
     "prepare": "husky install"
   },
   "repository": {
@@ -24,28 +25,20 @@
     "url": "https://github.com/youngluo/react-boilerplate/issues"
   },
   "homepage": "https://github.com/youngluo/react-boilerplate#readme",
-  "lint-staged": {
-    "*.{ts,tsx,js}": [
-      "eslint --fix",
-      "git add"
-    ]
-  },
   "config": {
     "commitizen": {
       "path": "cz-conventional-changelog"
     }
   },
+  "lint-staged": {
+    "*.{ts,tsx,js}": [
+      "eslint --fix"
+    ]
+  },
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
   },
   "dependencies": {
     "@ant-design/icons": "^4.6.3",
@@ -87,10 +80,8 @@
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.31.0",
     "eslint-config-airbnb": "^18.2.1",
-    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "fork-ts-checker-webpack-plugin": "^6.3.1",

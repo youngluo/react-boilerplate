@@ -1,23 +1,21 @@
 # React Boilerplate
 
-## dev
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+
+### dev
 
 ```
 yarn start
 ```
 
-## build
+### build
 
 ```
 yarn build
 ```
 
-## analyze
+### analyze
 
 ```
 yarn analyze
 ```
-
-## commitlint
-
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
