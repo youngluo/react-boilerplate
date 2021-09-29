@@ -1,10 +1,7 @@
-html,
-body,
-#app,
-.ant-layout {
-  height: 100%;
+#app {
+  height: 100vh;
 }
 
-body {
-  font-size: 14px;
+.ant-layout {
+  height: 100vh;
 }

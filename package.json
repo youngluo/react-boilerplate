@@ -33,6 +33,9 @@
   "lint-staged": {
     "*.{ts,tsx,js}": [
       "eslint --fix"
+    ],
+    "*.{css,sass,scss}": [
+      "stylelint --fix"
     ]
   },
   "commitlint": {
@@ -97,6 +100,8 @@
     "react-refresh": "^0.10.0",
     "sass-loader": "^12.1.0",
     "style-loader": "^3.2.1",
+    "stylelint": "^13.13.1",
+    "stylelint-config-sass-guidelines": "^8.0.0",
     "typescript": "^4.4.2",
     "webpack": "^5.51.1",
     "webpack-bundle-analyzer": "^4.4.2",
