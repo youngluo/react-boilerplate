@@ -19,3 +19,11 @@ yarn build
 ```
 yarn analyze
 ```
+
+## Q&A
+
+### hint: The '.husky/pre-commit' hook was ignored because it's not set as executable.
+
+```sh
+chmod ug+x .husky/**
+```
