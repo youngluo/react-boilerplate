@@ -57,7 +57,9 @@ module.exports = {
               importLoaders: 2,
               modules: {
                 auto: /.*(?<!\.global\.s?css)$/i,
-                localIdentName: isProduction ? '[hash:base64:8]' : '[path][name]__[local]'
+                localIdentName: isProduction
+                  ? '[hash:base64:8]'
+                  : '[path][name]__[local]'
               }
             }
           },

@@ -23,7 +23,5 @@ module.exports = merge(baseConfig, {
   output: {
     publicPath: '/'
   },
-  plugins: [
-    new ReactRefreshWebpackPlugin({ overlay: false })
-  ]
+  plugins: [new ReactRefreshWebpackPlugin({ overlay: false })]
 })

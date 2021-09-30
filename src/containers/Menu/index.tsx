@@ -6,7 +6,7 @@ import type { IRouter } from '@/config/routes'
 const { Item } = Menu
 
 interface IProps {
-  routes: IRouter[];
+  routes: IRouter[]
 }
 
 const MenuNav: FC<IProps> = ({ routes = [] }) => {

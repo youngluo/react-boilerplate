@@ -2,11 +2,11 @@ import { ReactNode, ComponentType } from 'react'
 import _ from 'lodash'
 
 export interface IRouter {
-  component: () => Promise<{ default: ComponentType<any> }>;
-  exact?: boolean;
-  icon: ReactNode;
-  title: string;
-  path: string;
+  component: () => Promise<{ default: ComponentType<any> }>
+  exact?: boolean
+  icon: ReactNode
+  title: string
+  path: string
 }
 
 export const loadRoutes = (): IRouter[] => {
