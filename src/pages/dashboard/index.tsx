@@ -1,13 +1,23 @@
-import { FC, useState } from 'react'
+import { FC, useState, useCallback } from 'react'
 
 const Dashboard: FC = () => {
   const [state, setState] = useState(0)
 
+  const onClick = useCallback(() => {
+    setTimeout(() => {
+      setState((c) => c + 1)
+      setState((c) => c + 1)
+      setState((c) => c + 1)
+    }, 0)
+  }, [])
+
   return (
-    <div onClick={() => setState((v) => v + 1)}>
-      dashboard
-      {state}
-    </div>
+    <>
+      <div onClick={onClick}>
+        dashboard
+        {state}
+      </div>
+    </>
   )
 }
 

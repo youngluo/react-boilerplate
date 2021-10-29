@@ -18,8 +18,12 @@
     "window": true,
     "node": true
   },
-  "extends": ["airbnb", "plugin:react/jsx-runtime"],
-  "plugins": ["react", "jsx-a11y", "import", "react-hooks"],
+  "extends": [
+    "airbnb",
+    "plugin:react/jsx-runtime",
+    "plugin:react-hooks/recommended"
+  ],
+  "plugins": ["react", "jsx-a11y", "import"],
   "rules": {
     "semi": ["error", "never"],
     "comma-dangle": ["error", "never"],
@@ -34,6 +38,7 @@
     "react/jsx-filename-extension": ["error", { "extensions": [".tsx"] }],
     "jsx-a11y/click-events-have-key-events": "off",
     "jsx-a11y/no-static-element-interactions": "off",
-    "import/no-extraneous-dependencies": "off"
+    "import/no-extraneous-dependencies": "off",
+    "import/prefer-default-export": "off"
   }
 }

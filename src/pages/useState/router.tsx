@@ -5,7 +5,7 @@ export default createRouter([
   {
     component: () => import('./index'),
     icon: <TagsOutlined />,
-    title: '标签管理',
-    path: '/tag'
+    title: 'useState',
+    path: '/useState'
   }
 ])
