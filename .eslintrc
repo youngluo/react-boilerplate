@@ -21,24 +21,59 @@
   "extends": [
     "airbnb",
     "plugin:react/jsx-runtime",
-    "plugin:react-hooks/recommended"
+    "plugin:react-hooks/recommended",
+    "plugin:prettier/recommended"
   ],
-  "plugins": ["react", "jsx-a11y", "import"],
+  "plugins": [
+    "react",
+    "jsx-a11y",
+    "import"
+  ],
   "rules": {
-    "semi": ["error", "never"],
-    "comma-dangle": ["error", "never"],
+    "semi": [
+      "error",
+      "never"
+    ],
+    "comma-dangle": [
+      "error",
+      "never"
+    ],
     "import/no-unresolved": "off",
     "import/extensions": "off",
-    "react/jsx-max-props-per-line": ["error", { "maximum": 1 }],
     "class-methods-use-this": "off",
-    "function-paren-newline": ["error", "consistent"],
-    "lines-between-class-members": ["error", "always"],
-    "no-multiple-empty-lines": ["error", { "max": 1 }],
-    "object-curly-newline": ["error", { "consistent": true }],
-    "react/jsx-filename-extension": ["error", { "extensions": [".tsx"] }],
+    "function-paren-newline": [
+      "error",
+      "consistent"
+    ],
+    "lines-between-class-members": [
+      "error",
+      "always"
+    ],
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1
+      }
+    ],
+    "object-curly-newline": [
+      "error",
+      {
+        "consistent": true
+      }
+    ],
+    "react/jsx-filename-extension": [
+      "error",
+      {
+        "extensions": [
+          ".tsx"
+        ]
+      }
+    ],
     "jsx-a11y/click-events-have-key-events": "off",
     "jsx-a11y/no-static-element-interactions": "off",
     "import/no-extraneous-dependencies": "off",
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "react/function-component-definition": "off",
+    "import/no-import-module-exports": "off",
   }
 }

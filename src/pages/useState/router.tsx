@@ -3,7 +3,7 @@ import { createRouter } from '@/config/routes'
 
 export default createRouter([
   {
-    component: () => import('./index'),
+    component: () => import(/* webpackChunkName: "useState" */ './index'),
     icon: <TagsOutlined />,
     title: 'useState',
     path: '/useState'

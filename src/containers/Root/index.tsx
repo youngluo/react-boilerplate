@@ -13,10 +13,7 @@ const routes = loadRoutes()
 const Root: FC = () => (
   <BrowserRouter>
     <Layout>
-      <Sider
-        width={230}
-        collapsible
-      >
+      <Sider width={230} collapsible>
         <div className={styles.logo}>123</div>
         <Menu routes={routes} />
       </Sider>

@@ -13,11 +13,7 @@ const MenuNav: FC<IProps> = ({ routes = [] }) => {
   const { pathname } = useLocation()
 
   return (
-    <Menu
-      selectedKeys={[pathname]}
-      mode="inline"
-      theme="dark"
-    >
+    <Menu selectedKeys={[pathname]} mode="inline" theme="dark">
       {routes.map((route) => (
         <Item key={route.path}>
           <NavLink to={route.path}>

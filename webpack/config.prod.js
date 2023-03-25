@@ -7,6 +7,9 @@ const baseConfig = require('./config.base')
 module.exports = merge(baseConfig, {
   mode: 'production',
   devtool: 'source-map',
+  cache: {
+    type: 'filesystem'
+  },
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash:8].css'

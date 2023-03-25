@@ -1,8 +1,6 @@
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const WebpackBar = require('webpackbar')
-const webpack = require('webpack')
 const path = require('path')
 const packageInfo = require('../package.json')
 
@@ -19,8 +17,8 @@ module.exports = {
   entry: ENTRY_FILE,
   output: {
     path: BUILD_PATH,
-    filename: 'js/[name].[contenthash:8].js',
-    chunkFilename: 'js/[name].[contenthash:8].chunk.js'
+    filename: 'js/[name].[chunkhash:8].js',
+    chunkFilename: 'js/[name].[chunkhash:8].chunk.js'
   },
   module: {
     rules: [
@@ -82,26 +80,25 @@ module.exports = {
       title: appName,
       hash: false
     }),
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    new ForkTsCheckerWebpackPlugin(), // 使用 babel 编译 ts 时，增加类型检测
     new WebpackBar()
   ],
   optimization: {
     runtimeChunk: 'single',
     splitChunks: {
-      chunks: 'all',
       cacheGroups: {
-        common: {
+        defaultVendors: {
+          test: /node_modules/,
+          chunks: 'initial',
+          name: 'vendor',
+          priority: -10,
+          reuseExistingChunk: true
+        },
+        default: {
+          chunks: 'all',
           name: 'common',
           minChunks: 2,
-          priority: 0,
-          minSize: 0
-        },
-        vendor: {
-          test: /node_modules/,
-          name: 'vendor',
-          minChunks: 2,
-          priority: 1
+          priority: -20,
+          reuseExistingChunk: true
         }
       }
     }

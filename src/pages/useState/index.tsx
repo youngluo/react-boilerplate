@@ -23,10 +23,7 @@ const UseState: FC = () => {
           }, [])
         `}
       </Code>
-      <Button
-        onClick={onMultipleUpdater}
-        type="primary"
-      >
+      <Button onClick={onMultipleUpdater} type="primary">
         {state}
       </Button>
     </>

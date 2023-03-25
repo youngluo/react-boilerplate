@@ -12,12 +12,10 @@ const Dashboard: FC = () => {
   }, [])
 
   return (
-    <>
-      <div onClick={onClick}>
-        dashboard
-        {state}
-      </div>
-    </>
+    <div onClick={onClick}>
+      dashboard
+      {state}
+    </div>
   )
 }
 
